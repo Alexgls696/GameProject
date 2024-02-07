@@ -1,0 +1,15 @@
+﻿#pragma once
+#include "Map.h"
+
+class MapC:public Map
+{
+public:
+    MapC()
+    {
+        rect.setFillColor(Color::Yellow);
+    }
+    void draw(sf::RenderWindow& window) override
+    {
+        window.draw(rect);
+    }
+};
