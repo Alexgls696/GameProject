@@ -13,7 +13,11 @@ int main() {
         {
             if(event.type==Event::Closed)
             {
-                window.clear();
+                window.close();
+            }
+            if(Keyboard::isKeyPressed(Keyboard::Escape))
+            {
+                window.close();
             }
         }
         window.display();
