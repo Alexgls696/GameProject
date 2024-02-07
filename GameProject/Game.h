@@ -30,9 +30,9 @@ public:
         VertLine[0].color=Color(0,0,0);
         VertLine[1].position = Vector2f(960,1080);
         VertLine[1].color=Color(0,0,0);
-        VertLine[2].position = Vector2f(0,550);
+        VertLine[2].position = Vector2f(0,540);
         VertLine[2].color=Color(0,0,0);
-        VertLine[3].position = Vector2f(1920,550);
+        VertLine[3].position = Vector2f(1920,540);
         VertLine[3].color=Color(0,0,0);
         return VertLine;
     }
@@ -40,6 +40,7 @@ public:
     void go()
     {
         RenderWindow window(VideoMode(1920,1080),"Game",Style::Fullscreen);
+        window.setFramerateLimit(60);
         while(window.isOpen())
         {
             window.clear(Color(255,255,255));

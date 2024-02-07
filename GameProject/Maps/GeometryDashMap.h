@@ -14,4 +14,5 @@ public:
     {
         window.draw(rect);
     }
+
 };
