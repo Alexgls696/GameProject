@@ -9,9 +9,7 @@ class Game
 {
 private:
     Map **maps;
-    Player **player;
     int score;
-   
 public:
     Game()
     {
@@ -41,10 +39,16 @@ public:
     {
         RenderWindow window(VideoMode(1920,1080),"Game",Style::Fullscreen);
         window.setFramerateLimit(60);
+        Players* player;
+        int number = rand() % MAPS_COUNT;
+        maps[number]->setStatus(true);
+        player = new PlayerPacMan;
+        player->getSprite().setPosition(maps[number]->getBoundsPosition()->x, maps[number]->getBoundsPosition()->x);
         while(window.isOpen())
         {
             window.clear(Color(255,255,255));
             Event event;
+            maps[0]->setStatus(true);
             while(window.pollEvent(event))
             {
                 if(event.type==Event::Closed)
@@ -55,12 +59,18 @@ public:
                 {
                     window.close();
                 }
+                player->Direction(event);
+                
+
             }
             for(int i = 0; i < MAPS_COUNT; i++)
             {
                 maps[i]->draw(window);
             }
-            window.draw(DrawWeb());
+            for (int i = 0; i < MAPS_COUNT; i++)
+                window.draw(DrawWeb());
+            player->draw(window);
+            player->move();
             window.display();
         }
     }

@@ -134,6 +134,9 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Maps\GeometryDashMap.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Objects\Bonuses.cpp" />
+    <ClCompile Include="Objects\PlayerPacMan.cpp" />
+    <ClCompile Include="Objects\Players.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -146,7 +149,11 @@
     <ClInclude Include="Maps\MapB.h" />
     <ClInclude Include="Maps\MapC.h" />
     <ClInclude Include="Maps\MapD.h" />
-    <ClInclude Include="Players\Player.h" />
+    <ClInclude Include="Objects\Bonuses.h" />
+    <ClInclude Include="Objects\Object.h" />
+    <ClInclude Include="Objects\PlayerPacMan.h" />
+    <ClInclude Include="Objects\Players.h" />
+    <ClInclude Include="Objects\RedPacMan.h" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Textures\" />

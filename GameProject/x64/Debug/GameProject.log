@@ -1,2 +1,12 @@
-﻿  Source.cpp
-C:\Users\Александр\Desktop\Учёба\ПРОГА\GameProject\GameProject\SFML\Graphics.hpp(32,10): fatal  error C1083: Не удается открыть файл включение: SFML/Window.hpp: No such file or directory,
+﻿  Game.cpp
+C:\Users\Александр\Desktop\GameProject\GameProject\Game.h(16,19): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  GeometryDashMap.cpp
+  main.cpp
+C:\Users\Александр\Desktop\GameProject\GameProject\Game.h(16,19): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\Александр\Desktop\GameProject\GameProject\main.cpp(8,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Bonuses.cpp
+  PlayerPacMan.cpp
+  Players.cpp
+  Создание кода...
+C:\Users\Александр\Desktop\GameProject\GameProject\Maps\Map.h(34): warning C4172: возвращение адреса локальной или временной переменной : array
+  GameProject.vcxproj -> C:\Users\Александр\Desktop\GameProject\x64\Debug\GameProject.exe

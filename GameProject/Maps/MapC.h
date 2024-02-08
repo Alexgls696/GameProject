@@ -6,7 +6,7 @@ class MapC:public Map
 public:
     MapC()
     {
-        rect.setFillColor(Color::Yellow);
+        rect.setFillColor(Color::Blue);
     }
     void draw(sf::RenderWindow& window) override
     {

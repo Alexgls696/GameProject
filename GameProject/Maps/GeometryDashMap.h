@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include "../Library.h"
+#include "../Objects/PlayerPacMan.h"
+#include "../Maps/Map.h"
 
 class GeometryDashMap: public Map
 {
@@ -14,5 +16,4 @@ public:
     {
         window.draw(rect);
     }
-
 };

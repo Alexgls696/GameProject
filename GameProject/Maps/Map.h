@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "../Library.h"
+#include "../Objects/Object.h"
 
 #define ONE sf::Vector2f(0,0)
 #define TWO sf::Vector2f(960,0)
@@ -13,6 +14,7 @@ protected:
     sf::RectangleShape rect;
     static int index;
     sf::Texture texture;
+    bool active = false;
 public:
     //index 0 - левый верхний угол
     //index 1 - левый нижний угол
@@ -31,7 +33,6 @@ public:
         array[3]=four;
         return array;
     }
-public:
     Map()
     {
         rect.setSize(sf::Vector2f(960,540));
@@ -65,6 +66,13 @@ public:
     virtual sf::RectangleShape&getRect()
     {
         return rect;
+    }
+
+    virtual void setStatus(bool status) {
+        this->active = status;
+    }
+    virtual bool getStatus() {
+        return active;
     }
     
 };
