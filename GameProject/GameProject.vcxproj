@@ -138,9 +138,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bonuses\Bonuses.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Library.h" />
-    <ClInclude Include="Maps\Bonuses\Bonuses.h" />
     <ClInclude Include="Maps\GeometryDashMap.h" />
     <ClInclude Include="Maps\Map.h" />
     <ClInclude Include="Maps\MapB.h" />
