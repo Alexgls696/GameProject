@@ -4,14 +4,23 @@
 #include "Maps/MapB.h"
 #include "Maps/MapC.h"
 #include "Maps/MapD.h"
+#include "Players//RedPacMan.h"
 
 class Game
 {
 private:
-    Map **maps;
+    
+    Map **maps=nullptr;
+    Players* player=nullptr;
+    //-------------------------------------------------
+    //Добавляем сюда ваш новый объект Player
+    
+    Players*pacMan = new PlayerPacMan;
+    Players*redPacMan = new PlayerRedPacMan;
+    Vector2f playerPosition;
     int score;
 public:
-    Game()
+    Game() //Добавление карт, не трогаем
     {
         srand(time(0));
         maps = new Map*[MAPS_COUNT];
@@ -21,7 +30,7 @@ public:
         maps[3]=new MapD;
         score = 0;
     }
-    VertexArray DrawWeb()
+    VertexArray DrawWeb() //Сетка
     {
         VertexArray VertLine(Lines,4);
         VertLine[0].position = Vector2f(960,0);
@@ -34,21 +43,42 @@ public:
         VertLine[3].color=Color(0,0,0);
         return VertLine;
     }
+
+    void setPlayer()
+    //Добавляем для вашего персонажа аналогичное условие с его именем (name задается в карте Map,
+    //устанавливаем его в конструкторе вашей карты)
+    {
+        for(int i = 0; i < MAPS_COUNT; i++)
+        {
+            if(player->getSprite().getGlobalBounds().intersects(maps[i]->getRect().getGlobalBounds())
+               &&maps[i]->get_name()=="PacMan")
+            {
+                player=pacMan;
+                player->getSprite().setPosition(playerPosition);
+            };
+            if(player->getSprite().getGlobalBounds().intersects(maps[i]->getRect().getGlobalBounds())
+                &&maps[i]->get_name()=="B")
+            {
+                player=redPacMan;
+                player->getSprite().setPosition(playerPosition);
+            };
+        }
+    }
     
     void go()
     {
         RenderWindow window(VideoMode(1920,1080),"Game",Style::Fullscreen);
         window.setFramerateLimit(60);
-        Players* player;
         int number = rand() % MAPS_COUNT;
-        maps[number]->setStatus(true);
-        player = new PlayerPacMan;
-        player->getSprite().setPosition(maps[number]->getBoundsPosition()->x, maps[number]->getBoundsPosition()->x);
+        player=pacMan; //Криво, но пусть так
+        playerPosition = Vector2f(maps[number]->getBoundsPosition()->x+rand()%800,
+            maps[number]->getBoundsPosition()->y+rand()%360); //позиция в карте рандом, карта рандом
+        player->getSprite().setPosition(playerPosition);
+        
         while(window.isOpen())
         {
             window.clear(Color(255,255,255));
             Event event;
-            maps[0]->setStatus(true);
             while(window.pollEvent(event))
             {
                 if(event.type==Event::Closed)
@@ -60,9 +90,8 @@ public:
                     window.close();
                 }
                 player->Direction(event);
-                
-
             }
+            setPlayer();
             for(int i = 0; i < MAPS_COUNT; i++)
             {
                 maps[i]->draw(window);
@@ -71,8 +100,11 @@ public:
                 window.draw(DrawWeb());
             player->draw(window);
             player->move();
+            
+            playerPosition=player->getSprite().getPosition();
+            //Обновляет шлобальную позицию персонажа после изменения позиции спрайта
+            
             window.display();
         }
     }
-    
 };

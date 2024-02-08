@@ -1,11 +1,17 @@
 ﻿#pragma once
 #include "../Library.h"
-#include "../Objects/Object.h"
 
 #define ONE sf::Vector2f(0,0)
 #define TWO sf::Vector2f(960,0)
 #define THREE sf::Vector2f(0,540)
 #define FOUR sf::Vector2f(960,540)
+
+
+/*----------------------------------------------
+Этот класс не трогаем!
+----------------------------------------------
+
+*/
 
 class Map //abstract class
 {
@@ -14,7 +20,7 @@ protected:
     sf::RectangleShape rect;
     static int index;
     sf::Texture texture;
-    bool active = false;
+    string name;
 public:
     //index 0 - левый верхний угол
     //index 1 - левый нижний угол
@@ -67,13 +73,9 @@ public:
     {
         return rect;
     }
-
-    virtual void setStatus(bool status) {
-        this->active = status;
+    virtual string get_name() const
+    {
+        return name;
     }
-    virtual bool getStatus() {
-        return active;
-    }
-    
 };
 

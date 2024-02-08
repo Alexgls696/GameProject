@@ -132,11 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Maps\GeometryDashMap.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Objects\Bonuses.cpp" />
-    <ClCompile Include="Objects\PlayerPacMan.cpp" />
-    <ClCompile Include="Objects\Players.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -144,16 +140,16 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Library.h" />
+    <ClInclude Include="Maps\Bonuses\Bonuses.h" />
     <ClInclude Include="Maps\GeometryDashMap.h" />
     <ClInclude Include="Maps\Map.h" />
     <ClInclude Include="Maps\MapB.h" />
     <ClInclude Include="Maps\MapC.h" />
     <ClInclude Include="Maps\MapD.h" />
-    <ClInclude Include="Objects\Bonuses.h" />
-    <ClInclude Include="Objects\Object.h" />
-    <ClInclude Include="Objects\PlayerPacMan.h" />
-    <ClInclude Include="Objects\Players.h" />
-    <ClInclude Include="Objects\RedPacMan.h" />
+    <ClInclude Include="Obstacles\Obstacles" />
+    <ClInclude Include="Players\PlayerPacMan.h" />
+    <ClInclude Include="Players\Players.h" />
+    <ClInclude Include="Players\RedPacMan.h" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Textures\" />
