@@ -100,7 +100,7 @@ public:
                 window.draw(DrawWeb());
             player->draw(window);
             player->move();
-            
+            player->checkBounds();
             playerPosition=player->getSprite().getPosition();
             //Обновляет шлобальную позицию персонажа после изменения позиции спрайта
             
