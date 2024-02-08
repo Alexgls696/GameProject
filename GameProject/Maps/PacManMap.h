@@ -3,10 +3,10 @@
 #include "../Players//PlayerPacMan.h"
 #include "../Maps/Map.h"
 
-class GeometryDashMap: public Map
+class PacManMap: public Map
 {
 public:
-    GeometryDashMap()
+    PacManMap()
     {
         name="PacMan";
         rect.setFillColor(Color::Magenta);

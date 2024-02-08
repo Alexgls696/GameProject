@@ -11,10 +11,11 @@ class PlayerRedPacMan : public Players
 public:
     PlayerRedPacMan():Players()
     {
-        image.loadFromFile("Textures/red.png");
+        image.loadFromFile("Textures/red1.png");
         image.createMaskFromColor(Color::White);
         texture.loadFromImage(image);
         sprite.setTexture(texture);
+        sprite.setOrigin(sprite.getPosition().x+texture.getSize().x/2,sprite.getPosition().y+texture.getSize().y/2);
     }
     void draw(RenderWindow&window) override
     {
@@ -50,6 +51,5 @@ public:
         case STOP:
             break;
         }
-        
     }
 };

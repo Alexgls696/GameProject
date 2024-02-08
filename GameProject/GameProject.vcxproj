@@ -141,7 +141,7 @@
     <ClInclude Include="Bonuses\Bonuses.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Library.h" />
-    <ClInclude Include="Maps\GeometryDashMap.h" />
+    <ClInclude Include="Maps\PacManMap.h" />
     <ClInclude Include="Maps\Map.h" />
     <ClInclude Include="Maps\MapB.h" />
     <ClInclude Include="Maps\MapC.h" />

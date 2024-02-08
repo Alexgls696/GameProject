@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "Library.h"
-#include "Maps/GeometryDashMap.h"
+#include "Maps\PacManMap.h"
 #include "Maps/MapB.h"
 #include "Maps/MapC.h"
 #include "Maps/MapD.h"
@@ -24,7 +24,7 @@ public:
     {
         srand(time(0));
         maps = new Map*[MAPS_COUNT];
-        maps[0]=new GeometryDashMap;
+        maps[0]=new PacManMap;
         maps[1]=new MapB;
         maps[2]=new MapC;
         maps[3]=new MapD;
