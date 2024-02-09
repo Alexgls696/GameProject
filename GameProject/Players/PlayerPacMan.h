@@ -6,7 +6,6 @@ using namespace std;
 class PlayerPacMan : public Players
 {
 private:
-    bool pressed = false;
     int StartAngle = 0;
 public:
     PlayerPacMan():Players()

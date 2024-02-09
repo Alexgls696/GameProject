@@ -5,7 +5,7 @@ using namespace sf;
 
 enum Direction //НАПРАВЛЕНИЯ ДВИЖЕНИЯ
 {
-    STOP,LEFT,RIGHT,UP,DOWN
+    STOP,LEFT,RIGHT,UP,DOWN, DOWN_LEFT,DOWN_RIGHT, UP_RIGHT, UP_LEFT
 };
 
 class Players
@@ -16,10 +16,15 @@ protected:
     Sprite sprite;
     RectangleShape rectangle_shape;
     Image image;
+    bool pressed = false;
 public:
     virtual void draw(RenderWindow& window) = 0; //Рисуем вашего персонажа так, как нужно
     virtual void move() = 0; //Движение с помощью объекта direction - класс PlayerPacMan как пример
     virtual void Direction(Event&event) = 0; //Направление движения, пример тоже в классе PlayerPacMan
+    virtual Vector2f getCenter()
+    {
+        return Vector2f(sprite.getPosition().x+texture.getSize().x/2,sprite.getPosition().y+texture.getSize().y/2);
+    }
     Sprite&getSprite() 
     {
         return sprite;
@@ -35,5 +40,4 @@ public:
             direction=STOP;
         }
     }
-    
 };

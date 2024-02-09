@@ -22,6 +22,7 @@ protected:
     sf::Texture texture;
     string name;
 public:
+    bool active = false;
     //index 0 - левый верхний угол
     //index 1 - левый нижний угол
     //index 2 - правый нижний угол
@@ -42,7 +43,7 @@ public:
     Map()
     {
         rect.setSize(sf::Vector2f(960,540));
-        rect.setFillColor(sf::Color::Black);
+        rect.setFillColor(sf::Color::White);
         int random;
         sf::Vector2f pos;
         while(true)

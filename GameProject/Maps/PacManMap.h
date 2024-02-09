@@ -8,8 +8,9 @@ class PacManMap: public Map
 public:
     PacManMap()
     {
-        name="PacMan";
-        rect.setFillColor(Color::Magenta);
+        name="PacManMap";
+        rect.setFillColor(Color::Green);
+        texture.loadFromFile("Textures//good.png");
         rect.setTexture(&texture);
     }
     void draw(RenderWindow& window) override

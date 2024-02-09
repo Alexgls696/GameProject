@@ -143,13 +143,15 @@
     <ClInclude Include="Library.h" />
     <ClInclude Include="Maps\PacManMap.h" />
     <ClInclude Include="Maps\Map.h" />
-    <ClInclude Include="Maps\MapB.h" />
+    <ClInclude Include="Maps\RedDeadMap.h" />
     <ClInclude Include="Maps\MapC.h" />
     <ClInclude Include="Maps\MapD.h" />
     <ClInclude Include="Obstacles\Obstacles" />
+    <ClInclude Include="Players\PlayerCowboy.h" />
     <ClInclude Include="Players\PlayerPacMan.h" />
     <ClInclude Include="Players\Players.h" />
     <ClInclude Include="Players\RedPacMan.h" />
+    <ClInclude Include="Sound\Sound.h" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Textures\" />
