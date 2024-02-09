@@ -8,7 +8,7 @@
 #include "Players/PlayerCowboy.h"
 #include <thread>
 #include <time.h>
-
+//Изменения в Visual Studio
 class Game
 {
 private:
