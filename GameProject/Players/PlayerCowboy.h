@@ -7,7 +7,7 @@ private:
     float CurrentFrame = 0;
     Clock clock;
     float time;
-    float speed = 0.1;
+    float speed = 0.1;//скорость передвижения
 public:
     PlayerCowboy()
     {
