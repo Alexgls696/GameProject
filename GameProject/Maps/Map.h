@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include "../Library.h"
+#include "Bonuses/Bonuses.h"
+#include "Bonuses/PacManBonus.h"
 
 #define ONE sf::Vector2f(0,0)
 #define TWO sf::Vector2f(960,0)
@@ -21,6 +23,8 @@ protected:
     static int index;
     sf::Texture texture;
     string name;
+    vector<Bonuses*>bonuses;
+    int countBonuses = 0;
 public:
     bool active = false;
     //index 0 - левый верхний угол
@@ -77,6 +81,12 @@ public:
     virtual string get_name() const
     {
         return name;
+    }
+    virtual void drawBonuses(RenderWindow&window) = 0;
+    
+    vector<Bonuses*>getBonuses() 
+    {
+        return bonuses;
     }
 };
 

@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Players.h"
+
 class PlayerCowboy : public  Players
 {
 private:

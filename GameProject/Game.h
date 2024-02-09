@@ -16,9 +16,9 @@ private:
     Players* player=nullptr;
     //-------------------------------------------------
     //Добавляем сюда ваш новый объект Player
-    
     Vector2f playerPosition;
-    int score;
+    int score = 0;
+    
 public:
     Game() //Добавление карт, не трогаем
     {
@@ -30,6 +30,11 @@ public:
         maps[3]=new MapD;
         score = 0;
     }
+    ~Game()
+    {
+        delete []maps;
+    }
+    
     VertexArray DrawWeb() //Сетка
     {
         VertexArray VertLine(Lines,4);
@@ -44,6 +49,23 @@ public:
         return VertLine;
     }
 
+    void checkBonuses()
+    {
+        for(int i = 0; i < MAPS_COUNT; i++)
+        {
+            for(int j = 0; j < maps[i]->getBonuses().size() ;j++)
+            {
+                if(maps[i]->getBonuses()[j]->getSprite()
+                    .getGlobalBounds()
+                    .intersects(player->getSprite().getGlobalBounds()))
+                {
+                    score+=100;
+                    maps[i]->getBonuses().at(j)->getSprite().setPosition(-500,-500);
+                }
+            }
+        }
+    }
+    
     void setPassive(int a)
     {
         for(int i = 0; i < MAPS_COUNT ;i++)
@@ -124,10 +146,15 @@ public:
             setPlayer();
             player->move();
             player->checkBounds();
+            checkBonuses();
             playerPosition=player->getSprite().getPosition();
             for(int i = 0; i < MAPS_COUNT; i++)
             {
                 maps[i]->draw(window);
+            }
+            for(int i = 0; i < MAPS_COUNT; i++)
+            {
+                maps[i]->drawBonuses(window);
             }
             for (int i = 0; i < MAPS_COUNT; i++)
                 window.draw(DrawWeb());
