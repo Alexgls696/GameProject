@@ -14,7 +14,7 @@ public:
         texture.loadFromFile("Textures/cowboy.png");
         sprite.setTexture(texture);
         sprite.setTextureRect(IntRect(10, 0, 60, 80));
-        sprite.setOrigin(sprite.getPosition().x + sprite.getTextureRect().width / 2, sprite.getTextureRect().height / 2);
+        sprite.setOrigin(sprite.getPosition().x + sprite.getTextureRect().width / 2, sprite.getTextureRect().height/2);
         sprite.setScale(1.5f, 1.5f);
     }
 
@@ -23,6 +23,7 @@ public:
         time = clock.getElapsedTime().asMicroseconds();
         clock.restart();
         time = time / 800;
+        
         if (direction == LEFT)
         {
             CurrentFrame += 0.01 * time;
@@ -98,21 +99,18 @@ public:
             && !(Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A))
             && !(Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D)))
         {
-            pressed = true;
             direction = UP;
         }
         if (Keyboard::isKeyPressed(sf::Keyboard::A) || Keyboard::isKeyPressed(sf::Keyboard::Left)
             && !(Keyboard::isKeyPressed(sf::Keyboard::S))
             && !((Keyboard::isKeyPressed(Keyboard::Up)) || (Keyboard::isKeyPressed(Keyboard::W))))
         {
-            pressed = true;
             direction = LEFT;
         }
         if (Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(sf::Keyboard::Right)
             && !(Keyboard::isKeyPressed(sf::Keyboard::S))
             && !((Keyboard::isKeyPressed(Keyboard::Up)) || (Keyboard::isKeyPressed(Keyboard::W))))
         {
-            pressed = true;
             direction = RIGHT;
         }
         if (Keyboard::isKeyPressed(sf::Keyboard::S) || Keyboard::isKeyPressed(sf::Keyboard::Down)
@@ -121,31 +119,26 @@ public:
             && !(Keyboard::isKeyPressed(sf::Keyboard::A))
             && !(Keyboard::isKeyPressed(sf::Keyboard::Left)))
         {
-            pressed = true;
             direction = DOWN;
         }
         if ((Keyboard::isKeyPressed(Keyboard::Down) && (Keyboard::isKeyPressed(Keyboard::Left)))
             || (Keyboard::isKeyPressed(Keyboard::S) && (Keyboard::isKeyPressed(Keyboard::A))))
         {
-            pressed = true;
             direction = DOWN_LEFT;
         }
         if ((Keyboard::isKeyPressed(Keyboard::Down) && (Keyboard::isKeyPressed(Keyboard::Right)))
             || (Keyboard::isKeyPressed(Keyboard::S) && (Keyboard::isKeyPressed(Keyboard::D))))
         {
-            pressed = true;
             direction = DOWN_RIGHT;
         }
         if (Keyboard::isKeyPressed(Keyboard::Up) && Keyboard::isKeyPressed(Keyboard::Left) ||
             Keyboard::isKeyPressed(Keyboard::W) && Keyboard::isKeyPressed(Keyboard::A))
         {
-            pressed = true;
             direction = UP_LEFT;
         }
         if ((Keyboard::isKeyPressed(Keyboard::Up) && (Keyboard::isKeyPressed(Keyboard::Right))) ||
             (Keyboard::isKeyPressed(Keyboard::W) && (Keyboard::isKeyPressed(Keyboard::D))))
         {
-            pressed = true;
             direction = UP_RIGHT;
         }
         if (event.type == Event::KeyReleased)
@@ -156,13 +149,13 @@ public:
 
     void checkBounds() override
     {
-        if (sprite.getPosition().x < 0 || sprite.getPosition().x + sprite.getTextureRect().getSize().x>1920)
+        if (sprite.getPosition().x-sprite.getTextureRect().width/2 <0 ||sprite.getPosition().x+sprite.getTextureRect().width/2>1920)
         {
-            direction = STOP;
+            direction=STOP;
         }
-        if (sprite.getPosition().y < 0 || sprite.getPosition().y + sprite.getTextureRect().getSize().y>1080)
+        if (sprite.getPosition().y-sprite.getTextureRect().height/2 <0 ||sprite.getPosition().y+sprite.getTextureRect().height/2>1080)
         {
-            direction = STOP;
+            direction=STOP;
         }
     }
 

@@ -86,15 +86,15 @@ public:
 
     void checkBounds() override
     {
-        if(sprite.getPosition().x-texture.getSize().x/2 <0 ||sprite.getPosition().x+texture.getSize().x/2>1920)
+        if(sprite.getPosition().x-sprite.getTextureRect().width/2 <0 ||sprite.getPosition().x+sprite.getTextureRect().width/2>1920)
         {
             direction=STOP;
             fail=true;
         }
-        if(sprite.getPosition().y-texture.getSize().y/2 <0 ||sprite.getPosition().y+texture.getSize().y/2>1080)
+        if(sprite.getPosition().y-sprite.getTextureRect().height/2 <0 ||sprite.getPosition().y+sprite.getTextureRect().height/2>1080)
         {
-            fail=true;
             direction=STOP;
+            fail=true;
         }
     }
 };

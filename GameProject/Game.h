@@ -137,17 +137,24 @@ public:
 
     void go()
     {
-        RenderWindow window(VideoMode(1920,1080),"Game");
+        RenderWindow window(VideoMode(1920,1080),"Game",Style::Fullscreen);
         window.setFramerateLimit(60);
         player=new PlayerPacMan;
         setUpPlayerPosition();
+        
         while(window.isOpen())
         {
             window.clear(Color(255,255,255));
             
             Event event;
+            setPlayer();
+            player->move();
+            player->checkBounds();
+            checkBonuses();
+            
             while(window.pollEvent(event))
             {
+                player->Direction(event);
                 if(event.type==Event::Closed)
                 {
                     window.close();
@@ -156,13 +163,7 @@ public:
                 {
                     window.close();
                 }
-                player->Direction(event);
             }
-
-            setPlayer();
-            player->move();
-            player->checkBounds();
-            checkBonuses();
             playerPosition=player->getSprite().getPosition();
             for(int i = 0; i < MAPS_COUNT; i++)
             {
