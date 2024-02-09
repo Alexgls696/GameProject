@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="Bonuses\Bonuses.h" />
     <ClInclude Include="Bonuses\PacManBonus.h" />
+    <ClInclude Include="Bonuses\RedDeadBonus.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Library.h" />
     <ClInclude Include="Maps\PacManMap.h" />

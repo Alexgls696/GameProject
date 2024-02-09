@@ -171,7 +171,10 @@ public:
             }
             for(int i = 0; i < MAPS_COUNT; i++)
             {
-                maps[i]->drawBonuses(window);
+                for (int j = 0; j < maps[i]->getBonuses().size(); j++)
+                {
+                    maps[i]->getBonuses()[j]->draw(window);
+                }
             }
             for (int i = 0; i < MAPS_COUNT; i++)
                 window.draw(DrawWeb());
