@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bonuses\Bonuses.h" />
+    <ClInclude Include="Bonuses\PacMoney.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Library.h" />
     <ClInclude Include="Maps\PacManMap.h" />
@@ -146,7 +147,7 @@
     <ClInclude Include="Maps\RedDeadMap.h" />
     <ClInclude Include="Maps\MapC.h" />
     <ClInclude Include="Maps\MapD.h" />
-    <ClInclude Include="Obstacles\Obstacles" />
+    <ClInclude Include="Obstacles\Obstacles.h" />
     <ClInclude Include="Players\PlayerCowboy.h" />
     <ClInclude Include="Players\PlayerPacMan.h" />
     <ClInclude Include="Players\Players.h" />

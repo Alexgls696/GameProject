@@ -6,15 +6,19 @@ using namespace std;
 class PlayerPacMan : public Players
 {
 private:
-    int StartAngle = 0;
+    float CurrentFrame = 0;
+    Clock clock;
+    float time;
+    float speed = 0.5;
 public:
     PlayerPacMan():Players()
     {
-        image.loadFromFile("Textures/one1.png");
-        image.createMaskFromColor(Color::White);
+        image.loadFromFile("Textures/PacMan.png");
+        image.createMaskFromColor(Color::Black);
         texture.loadFromImage(image);
         sprite.setTexture(texture);
-        sprite.setOrigin(sprite.getPosition().x+texture.getSize().x/2,sprite.getPosition().y+texture.getSize().y/2);
+        sprite.setTextureRect(IntRect(0, 0, 50, 46));
+        sprite.setOrigin(sprite.getPosition().x+sprite.getTextureRect().width/2,sprite.getTextureRect().height/2);
     }
     
     void draw(RenderWindow&window) override
@@ -51,26 +55,46 @@ public:
     
     void move() override
     {
+        time = clock.getElapsedTime().asMicroseconds();
+        clock.restart();
+        time = time / 3000;
+        if (CurrentFrame > 3) CurrentFrame -= 3;
+        CurrentFrame += 0.02 * time;
+        sprite.setTextureRect(IntRect(55*int(CurrentFrame), 0, 50, 46));
         switch(direction)
         {
         case LEFT:
-            sprite.move(Vector2f(-5,0));
+            sprite.move(-speed * time, 0);
             sprite.setRotation(180);
             break;
         case RIGHT:
-            sprite.move(Vector2f(5,0));
+            sprite.move(speed * time, 0);
             sprite.setRotation(0);
             break;
         case UP:
-            sprite.move(Vector2f(0,-5));
+            sprite.move(0, -speed * time);
             sprite.setRotation(270);
             break;
         case DOWN:
-            sprite.move(Vector2f(0,5));
+            sprite.move(0, speed * time);
             sprite.setRotation(90);
             break;
         case STOP:
             break;
+        }
+    }
+
+    void checkBounds() override
+    {
+        if(sprite.getPosition().x-texture.getSize().x/2 <0 ||sprite.getPosition().x+texture.getSize().x/2>1920)
+        {
+            direction=STOP;
+            fail=true;
+        }
+        if(sprite.getPosition().y-texture.getSize().y/2 <0 ||sprite.getPosition().y+texture.getSize().y/2>1080)
+        {
+            fail=true;
+            direction=STOP;
         }
     }
 };

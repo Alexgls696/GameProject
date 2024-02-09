@@ -16,7 +16,8 @@ protected:
     Sprite sprite;
     RectangleShape rectangle_shape;
     Image image;
-    bool pressed = false;
+    bool fail = false; //проигрыш
+    bool pressed = false; 
 public:
     virtual void draw(RenderWindow& window) = 0; //Рисуем вашего персонажа так, как нужно
     virtual void move() = 0; //Движение с помощью объекта direction - класс PlayerPacMan как пример

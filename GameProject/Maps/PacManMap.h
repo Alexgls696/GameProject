@@ -9,8 +9,8 @@ public:
     PacManMap()
     {
         name="PacManMap";
-        rect.setFillColor(Color::Green);
-        texture.loadFromFile("Textures//good.png");
+        rect.setFillColor(Color::White);
+        texture.loadFromFile("Textures//PacManMap.jpg");
         rect.setTexture(&texture);
     }
     void draw(RenderWindow& window) override
