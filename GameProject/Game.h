@@ -65,6 +65,27 @@ public:
             }
         }
     }
+
+    void setUpPlayerPosition()
+    {
+        int number = rand() % MAPS_COUNT;
+        link:
+        playerPosition = Vector2f(maps[number]->getBoundsPosition()->x+rand()%800+50,
+            maps[number]->getBoundsPosition()->y+rand()%360+50);
+        player->getSprite().setPosition(playerPosition);
+        for(int i = 0; i < MAPS_COUNT ; i++)
+        {
+            for(int j = 0; j < maps[i]->getBonuses().size() ;j++)
+            {
+                if(maps[i]->getBonuses()[j]->getSprite()
+                    .getGlobalBounds()
+                    .intersects(player->getSprite().getGlobalBounds()))
+                {
+                   goto link;
+                }
+            }
+        }
+    }
     
     void setPassive(int a)
     {
@@ -118,12 +139,8 @@ public:
     {
         RenderWindow window(VideoMode(1920,1080),"Game");
         window.setFramerateLimit(60);
-        int number = rand() % MAPS_COUNT;
         player=new PlayerPacMan;
-        playerPosition = Vector2f(maps[number]->getBoundsPosition()->x+rand()%800+50,
-            maps[number]->getBoundsPosition()->y+rand()%360+50); //позиция в карте рандом, карта рандом
-        player->getSprite().setPosition(playerPosition);
-        
+        setUpPlayerPosition();
         while(window.isOpen())
         {
             window.clear(Color(255,255,255));
@@ -141,8 +158,7 @@ public:
                 }
                 player->Direction(event);
             }
-            
-           
+
             setPlayer();
             player->move();
             player->checkBounds();
