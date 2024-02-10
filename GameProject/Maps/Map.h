@@ -12,7 +12,6 @@
 /*----------------------------------------------
 Этот класс не трогаем!
 ----------------------------------------------
-
 */
 
 class Map //abstract class
@@ -71,18 +70,28 @@ public:
                 break;
             }
         }
-        
     }
+    
     virtual void draw(sf::RenderWindow&window)=0;
+    
     virtual sf::RectangleShape&getRect()
     {
         return rect;
     }
+    
     virtual string get_name() const
     {
         return name;
     }
+
+    
+    
     virtual void drawBonuses(RenderWindow&window) = 0;
+
+    virtual void intersectBonuses(int index)
+    {
+        bonuses.at(index)->getSprite().setPosition(-500,-500);
+    }
     
     vector<Bonuses*>getBonuses() 
     {

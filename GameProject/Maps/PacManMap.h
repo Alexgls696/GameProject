@@ -40,10 +40,12 @@ public:
         texture.loadFromFile("Textures//PacManMap.jpg");
         rect.setTexture(&texture);
     }
+    
     void draw(RenderWindow& window) override
     {
         window.draw(rect);
     }
+    
     void drawBonuses(RenderWindow& window) override
     {
         for(int  i = 0; i < countBonuses; i++)
@@ -51,4 +53,5 @@ public:
             bonuses[i]->draw(window);
         }
     }
+    
 };

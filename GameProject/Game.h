@@ -56,14 +56,14 @@ public:
     {
         for(int i = 0; i < MAPS_COUNT; i++)
         {
-            for(int j = 0; j < maps[i]->getBonuses().size() ;j++)
+            for(int j = 0; j < maps[i]->getBonuses().size() ; j++)
             {
                 if(maps[i]->getBonuses()[j]->getSprite()
                     .getGlobalBounds()
                     .intersects(player->getSprite().getGlobalBounds()))
                 {
                     score+=100;
-                    maps[i]->getBonuses().at(j)->getSprite().setPosition(-500,-500);
+                    maps[i]->intersectBonuses(j);
                 }
             }
         }
@@ -149,17 +149,15 @@ public:
                 setPlayerFlag=true;
             }
         }
-       
     }
+    
     time_t timer;
     void go()
     {
-        RenderWindow window(VideoMode(WIDTH,HEIGHT),"Game");
+        RenderWindow window(VideoMode(WIDTH,HEIGHT),"Game",Style::Fullscreen);
         window.setFramerateLimit(60);
         player=new PlayerPacMan;
-        
         setUpPlayerPosition();
-
         timer = clock();//Второй поток с логикой игры
         thread logicThread([&]()
         {
@@ -169,15 +167,15 @@ public:
                 {
                     timer=clock();
                     setPlayer();
-                  player->move();
-                  player->checkBounds();
-                  checkBonuses();
+                    player->move();
+                    player->checkBounds();
+                    checkBonuses();
                     playerPosition=player->getSprite().getPosition();
                 }
             }
         });
-        logicThread.detach();
         
+        logicThread.detach();
         while(window.isOpen())
         {
             window.clear(Color(255,255,255));
