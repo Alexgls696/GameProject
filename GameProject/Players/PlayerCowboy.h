@@ -11,11 +11,12 @@ private:
 public:
     PlayerCowboy()
     {
+        direction=STOP;
         texture.loadFromFile("Textures/cowboy.png");
         sprite.setTexture(texture);
         sprite.setTextureRect(IntRect(10, 0, 60, 80));
-        sprite.setOrigin(sprite.getPosition().x + sprite.getTextureRect().width / 2, sprite.getTextureRect().height/2);
         sprite.setScale(1.5f, 1.5f);
+        sprite.setOrigin(sprite.getPosition().x + sprite.getTextureRect().width / 2, sprite.getPosition().y+sprite.getTextureRect().height/2); //изм
     }
 
     void move() override

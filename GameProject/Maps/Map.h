@@ -4,9 +4,9 @@
 #include "Bonuses/PacManBonus.h"
 
 #define ONE sf::Vector2f(0,0)
-#define TWO sf::Vector2f(960,0)
-#define THREE sf::Vector2f(0,540)
-#define FOUR sf::Vector2f(960,540)
+#define TWO sf::Vector2f(WIDTH/2,0)
+#define THREE sf::Vector2f(0,HEIGHT/2)
+#define FOUR sf::Vector2f(WIDTH/2,HEIGHT/2)
 
 
 /*----------------------------------------------
@@ -46,7 +46,7 @@ public:
     }
     Map()
     {
-        rect.setSize(sf::Vector2f(960,540));
+        rect.setSize(sf::Vector2f(WIDTH/2,HEIGHT/2));
         rect.setFillColor(sf::Color::White);
         int random;
         sf::Vector2f pos;

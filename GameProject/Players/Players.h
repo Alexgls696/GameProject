@@ -24,7 +24,7 @@ public:
     virtual void Direction(Event&event) = 0; //Направление движения, пример тоже в классе PlayerPacMan
     virtual Vector2f getCenter()
     {
-        return Vector2f(sprite.getPosition().x+texture.getSize().x/2,sprite.getPosition().y+texture.getSize().y/2);
+        return Vector2f(sprite.getPosition().x + sprite.getTextureRect().width / 2, sprite.getPosition().y+sprite.getTextureRect().height/2);
     }
     Sprite&getSprite() 
     {
@@ -41,4 +41,5 @@ public:
             direction=STOP;
         }
     }
+    
 };

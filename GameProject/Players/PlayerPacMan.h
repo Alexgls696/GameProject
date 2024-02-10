@@ -11,7 +11,7 @@ private:
     float time;
     float speed = 0.5;
 public:
-    PlayerPacMan():Players()
+    PlayerPacMan()
     {
         image.loadFromFile("Textures/PacMan.png");
         image.createMaskFromColor(Color::Black);
@@ -86,12 +86,12 @@ public:
 
     void checkBounds() override
     {
-        if(sprite.getPosition().x-sprite.getTextureRect().width/2 <0 ||sprite.getPosition().x+sprite.getTextureRect().width/2>1920)
+        if(sprite.getPosition().x-sprite.getTextureRect().width/2 <0 ||sprite.getPosition().x+sprite.getTextureRect().width/2>WIDTH)
         {
             direction=STOP;
             fail=true;
         }
-        if(sprite.getPosition().y-sprite.getTextureRect().height/2 <0 ||sprite.getPosition().y+sprite.getTextureRect().height/2>1080)
+        if(sprite.getPosition().y-sprite.getTextureRect().height/2 <0 ||sprite.getPosition().y+sprite.getTextureRect().height/2>HEIGHT)
         {
             direction=STOP;
             fail=true;

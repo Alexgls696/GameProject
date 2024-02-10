@@ -6,6 +6,8 @@
 #include <iostream>
 
 #define MAPS_COUNT 4
+#define WIDTH 1280
+#define HEIGHT 720
 
 using namespace std;
 using namespace sf;

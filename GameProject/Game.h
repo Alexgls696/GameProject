@@ -18,7 +18,9 @@ private:
     //Добавляем сюда ваш новый объект Player
     Vector2f playerPosition;
     int score = 0;
-    
+    bool game = true;
+    time_t setPlayerTimer;
+    bool setPlayerFlag;
 public:
     Game() //Добавление карт, не трогаем
     {
@@ -29,6 +31,7 @@ public:
         maps[2]=new MapC;
         maps[3]=new MapD;
         score = 0;
+        setPlayerFlag=clock();
     }
     ~Game()
     {
@@ -38,13 +41,13 @@ public:
     VertexArray DrawWeb() //Сетка
     {
         VertexArray VertLine(Lines,4);
-        VertLine[0].position = Vector2f(960,0);
+        VertLine[0].position = Vector2f(WIDTH/2,0);
         VertLine[0].color=Color(0,0,0);
-        VertLine[1].position = Vector2f(960,1080);
+        VertLine[1].position = Vector2f(WIDTH/2,HEIGHT);
         VertLine[1].color=Color(0,0,0);
-        VertLine[2].position = Vector2f(0,540);
+        VertLine[2].position = Vector2f(0,HEIGHT/2);
         VertLine[2].color=Color(0,0,0);
-        VertLine[3].position = Vector2f(1920,540);
+        VertLine[3].position = Vector2f(WIDTH,HEIGHT/2);
         VertLine[3].color=Color(0,0,0);
         return VertLine;
     }
@@ -70,8 +73,8 @@ public:
     {
         int number = rand() % MAPS_COUNT;
         link:
-        playerPosition = Vector2f(maps[number]->getBoundsPosition()->x+rand()%800+50,
-            maps[number]->getBoundsPosition()->y+rand()%360+50);
+        playerPosition = Vector2f(maps[number]->getBoundsPosition()->x+rand()%(WIDTH/2-50)+50,
+            maps[number]->getBoundsPosition()->y+rand()%(HEIGHT/2-50)+50);
         player->getSprite().setPosition(playerPosition);
         for(int i = 0; i < MAPS_COUNT ; i++)
         {
@@ -98,60 +101,87 @@ public:
             maps[i]->active=false;
         }
     }
+    
     void setPlayer()
     //Добавляем для вашего персонажа аналогичное условие с его именем (name задается в карте Map,
     //устанавливаем его в конструкторе вашей карты)
     {
-        for(int i = 0; i < MAPS_COUNT; i++)
+        if(setPlayerFlag)
         {
-            if(maps[i]->getRect().getGlobalBounds().intersects(player->getSprite().getGlobalBounds()))
+            for(int i = 0; i < MAPS_COUNT; i++)
             {
-                if(maps[i]->get_name()._Equal("PacManMap")&&maps[i]->active==false)
+                if(maps[i]->getRect().getGlobalBounds().contains(player->getCenter()))
                 {
-                    setPassive(i);
-                    maps[i]->active=true;
-                    player=new PlayerPacMan;
-                    player->getSprite().setPosition(playerPosition);
-                    continue;
-                }
-                if(maps[i]->get_name()._Equal("C")&&maps[i]->active==false)
-                {
-                    setPassive(i);
-                    maps[i]->active=true;
-                    player=new PlayerRedPacMan;
-                    player->getSprite().setPosition(playerPosition);
-                    continue;
-                }
-                if(maps[i]->get_name()._Equal("RedDeadMap")&&maps[i]->active==false)
-                {
-                    setPassive(i);
-                    maps[i]->active=true;
-                    player=new PlayerCowboy;
-                    player->getSprite().setPosition(playerPosition);
-                    continue;;
-                }
-            };
+                    if(maps[i]->get_name()._Equal("PacManMap")&&maps[i]->active==false)
+                    {
+                        setPassive(i);
+                        maps[i]->active=true;
+                        setPlayerFlag=false;
+                        player=new PlayerPacMan;
+                        player->getSprite().setPosition(playerPosition);
+                        continue;
+                    }
+                    if(maps[i]->get_name()._Equal("C")&&maps[i]->active==false)
+                    {
+                        setPassive(i);
+                        maps[i]->active=true;
+                        setPlayerFlag=false;
+                        player=new PlayerRedPacMan;
+                        player->getSprite().setPosition(playerPosition);
+                        continue;
+                    }
+                    if(maps[i]->get_name()._Equal("RedDeadMap")&&maps[i]->active==false)
+                    {
+                        setPassive(i);
+                        maps[i]->active=true;
+                        setPlayerFlag=false;
+                        player=new PlayerCowboy;
+                        player->getSprite().setPosition(playerPosition);
+                        continue;;
+                    }
+                };
+            }
+        }else
+        { //ОТ МЕРЦАНИЯ НА ГРАНИЦАХ, раз в пол секунды игроку разрешается измениться
+            if(clock()-setPlayerTimer>500)
+            {
+                setPlayerTimer=clock();
+                setPlayerFlag=true;
+            }
         }
        
     }
-
+    time_t timer;
     void go()
     {
-        RenderWindow window(VideoMode(1920,1080),"Game",Style::Fullscreen);
+        RenderWindow window(VideoMode(WIDTH,HEIGHT),"Game");
         window.setFramerateLimit(60);
         player=new PlayerPacMan;
+        
         setUpPlayerPosition();
+
+        timer = clock();//Второй поток с логикой игры
+        thread logicThread([&]()
+        {
+            while(game)
+            {
+                if(clock()-timer > 9)
+                {
+                    timer=clock();
+                    setPlayer();
+                  player->move();
+                  player->checkBounds();
+                  checkBonuses();
+                    playerPosition=player->getSprite().getPosition();
+                }
+            }
+        });
+        logicThread.detach();
         
         while(window.isOpen())
         {
             window.clear(Color(255,255,255));
-            
             Event event;
-            setPlayer();
-            player->move();
-            player->checkBounds();
-            checkBonuses();
-            
             while(window.pollEvent(event))
             {
                 player->Direction(event);
@@ -164,7 +194,6 @@ public:
                     window.close();
                 }
             }
-            playerPosition=player->getSprite().getPosition();
             for(int i = 0; i < MAPS_COUNT; i++)
             {
                 maps[i]->draw(window);
