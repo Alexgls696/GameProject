@@ -25,7 +25,7 @@ public:
         clock.restart();
         time = time / 800;
         
-        if (direction == LEFT)
+        if(direction == LEFT && sprite.getPosition().x - sprite.getTextureRect().width / 2 > 15)
         {
             CurrentFrame += 0.01 * time;
             if (CurrentFrame > 16) CurrentFrame -= 16;
@@ -33,7 +33,7 @@ public:
             sprite.move(-speed * time, 0);
         }
 
-        if (direction == RIGHT)
+        if (direction == RIGHT && sprite.getPosition().x + sprite.getTextureRect().width / 2 < WIDTH-25)
         {
             CurrentFrame += 0.01 * time;
             if (CurrentFrame > 16) CurrentFrame -= 16;
@@ -41,7 +41,7 @@ public:
             sprite.move(speed * time, 0);
         }
 
-        if (direction == UP)
+        if (direction == UP && sprite.getPosition().y - sprite.getTextureRect().height / 2 > 10)
         {
             CurrentFrame += 0.01 * time;
             if (CurrentFrame > 16) CurrentFrame -= 16;
@@ -49,7 +49,7 @@ public:
             sprite.move(0, -speed * time);
         }
 
-        if (direction == DOWN)
+        if (direction == DOWN && sprite.getPosition().y + sprite.getTextureRect().height / 2 < HEIGHT-40)
         {
             CurrentFrame += 0.01 * time;
             if (CurrentFrame > 16) CurrentFrame -= 16;
@@ -57,7 +57,7 @@ public:
             sprite.move(0, speed * time);
         }
 
-        if (direction == DOWN_LEFT)
+        if (direction == DOWN_LEFT && sprite.getPosition().y + sprite.getTextureRect().height / 2 < HEIGHT - 40 && sprite.getPosition().x - sprite.getTextureRect().width / 2 > 15)
         {
             CurrentFrame += 0.01 * time;
             if (CurrentFrame > 16) CurrentFrame -= 16;
@@ -65,7 +65,7 @@ public:
             sprite.move(-speed * time, speed * time);
         }
 
-        if (direction == DOWN_RIGHT)
+        if (direction == DOWN_RIGHT && sprite.getPosition().y + sprite.getTextureRect().height / 2 < HEIGHT - 40 && sprite.getPosition().x + sprite.getTextureRect().width / 2 < WIDTH - 25)
         {
             CurrentFrame += 0.01 * time;
             if (CurrentFrame > 16) CurrentFrame -= 16;
@@ -73,7 +73,7 @@ public:
             sprite.move(speed * time, speed * time);
         }
 
-        if (direction == UP_LEFT)
+        if (direction == UP_LEFT && sprite.getPosition().y - sprite.getTextureRect().height / 2 > 10 && sprite.getPosition().x - sprite.getTextureRect().width / 2 > 15)
         {
             CurrentFrame += 0.01 * time;
             if (CurrentFrame > 16) CurrentFrame -= 16;
@@ -81,7 +81,7 @@ public:
             sprite.move(-speed * time, -speed * time);
         }
 
-        if (direction == UP_RIGHT)
+        if (direction == UP_RIGHT && sprite.getPosition().y - sprite.getTextureRect().height / 2 > 10 && sprite.getPosition().x + sprite.getTextureRect().width / 2 < WIDTH - 25)
         {
             CurrentFrame += 0.01 * time;
             if (CurrentFrame > 16) CurrentFrame -= 16;
