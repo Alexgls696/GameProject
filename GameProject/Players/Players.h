@@ -20,7 +20,7 @@ protected:
     bool pressed = false;
     bool obstacle = false;
 public:
-    void setFlag(bool flag)
+    virtual void setFlag(bool flag)
     {
         this->obstacle=flag;
     }

@@ -27,7 +27,7 @@ public:
     {
         srand(time(0));
         maps = new Map*[MAPS_COUNT];
-        maps[0]=new PacManMap;
+        maps[0]=new PacManMap();
         maps[1]=new RedDeadMap;
         maps[2]=new MapC;
         maps[3]=new MapD;
@@ -81,6 +81,10 @@ public:
                     .intersects(player->getSprite().getGlobalBounds()))
                 {
                     player->setFlag(true);
+                    if(maps[i]->get_name()=="PacManMap")
+                    {
+                        game=false;
+                    }
                 }else
                 {
                     player->setFlag(false);
@@ -190,8 +194,8 @@ public:
         window.setFramerateLimit(60);
         player=new PlayerPacMan;
         setUpPlayerPosition();
+        game=true;
         timer = clock();//Второй поток с логикой игры
-
         thread logicThread([&]()
         {
             while(game)
@@ -210,7 +214,7 @@ public:
         });
         
         logicThread.detach();
-        while(window.isOpen())
+        while(window.isOpen()&&game)
         {
             window.clear(Color(255,255,255));
             Event event;

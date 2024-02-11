@@ -98,4 +98,8 @@ public:
             fail=true;
         }
     }
+    void setFlag(bool flag) override
+    {
+        flag=false;
+    }
 };
