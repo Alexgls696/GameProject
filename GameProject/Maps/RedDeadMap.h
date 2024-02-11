@@ -11,10 +11,10 @@ public:
     RedDeadMap()
     {
         countBonuses = 3;
-        countObstacles = 3;
+        countObstacles = 1;
 
-        obstacles.push_back(new RedDeadObstacles2);
-        obstacles.push_back(new RedDeadObstacles2);
+       /* obstacles.push_back(new RedDeadObstacles2);
+        obstacles.push_back(new RedDeadObstacles2);*/
         obstacles.push_back(new RedDeadObstacles);
         
         int Ax = rect.getPosition().x + 55;
