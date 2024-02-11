@@ -25,7 +25,7 @@ public:
         speed = 0.25;
         this->map = map;
         sprite.setOrigin(sprite.getPosition().x + sprite.getTextureRect().width / 2,
-                         sprite.getPosition().y + sprite.getTextureRect().height / 2);
+            sprite.getPosition().y + sprite.getTextureRect().height / 2);
         sprite.setColor(Color(255, 255, 255, 0));
         is_visibility = true;
     }
@@ -55,15 +55,36 @@ public:
         }
     }
 
+    bool is_not_outside(Object obj) {
+        if ((obj.x1 > 0) && (obj.y1 > 0) && (obj.x2 < 1920) && (obj.y2 < 1080)) {
+            return true;
+        }
+        return false;
+    }
+
+    bool is_in_the_barrier() {
+        Object obj;
+        obj.SetPosition(sprite.getPosition().x - 47 / 2 + 12, sprite.getPosition().y - 28,
+            sprite.getPosition().x + 47 / 2 - 12, sprite.getPosition().y + 28);
+        if (!map->is_not_overlap(obj, map->get_count_objects()) ||
+            !map->is_not_overlap_bonus(obj, map->get_count_bonus())) {
+            return true;
+        }
+        if ((obj.x1 < 0) || (obj.y1 < 0) || (obj.x2 > 1920) || (obj.y2 > 1080)) {
+            return true;
+        }
+        return false;
+    }
+
     void move_right(float time)
     {
         int xTexture = int(sprite.getPosition().x / 40) % 3;
         sprite.setTextureRect(IntRect(xTexture * 47, 233, 47, 56));
         Object obj;
         obj.SetPosition(sprite.getPosition().x - 47 / 2 + 12, sprite.getPosition().y - 28,
-                        sprite.getPosition().x + speed * time + 47 / 2 - 12, sprite.getPosition().y + 28);
-        if (map->is_not_overlap(obj, map->get_count_objects()) &&
-            map->is_not_overlap_bonus(obj, map->get_count_bonus()))
+            sprite.getPosition().x + speed * time + 47 / 2 - 12, sprite.getPosition().y + 28);
+        if ((map->is_not_overlap(obj, map->get_count_objects()) && is_not_outside(obj) &&
+            map->is_not_overlap_bonus(obj, map->get_count_bonus())) || is_in_the_barrier())
         {
             sprite.move(speed * time, 0);
         }
@@ -75,9 +96,9 @@ public:
         sprite.setTextureRect(IntRect(xTexture * 47, 137, 47, 56));
         Object obj;
         obj.SetPosition(sprite.getPosition().x - speed * time - 47 / 2 + 12, sprite.getPosition().y - 28,
-                        sprite.getPosition().x + 47 / 2 - 12, sprite.getPosition().y + 28);
-        if (map->is_not_overlap(obj, map->get_count_objects()) &&
-            map->is_not_overlap_bonus(obj, map->get_count_bonus()))
+            sprite.getPosition().x + 47 / 2 - 12, sprite.getPosition().y + 28);
+        if ((map->is_not_overlap(obj, map->get_count_objects()) && is_not_outside(obj) &&
+            map->is_not_overlap_bonus(obj, map->get_count_bonus())) || is_in_the_barrier())
         {
             sprite.move(-speed * time, 0);
         }
@@ -89,9 +110,9 @@ public:
         sprite.setTextureRect(IntRect(xTexture * 47, 329, 47, 56));
         Object obj;
         obj.SetPosition(sprite.getPosition().x - 47 / 2 + 12, sprite.getPosition().y - 28 - speed * time,
-                        sprite.getPosition().x + 47 / 2 - 12, sprite.getPosition().y + 28);
-        if (map->is_not_overlap(obj, map->get_count_objects()) &&
-            map->is_not_overlap_bonus(obj, map->get_count_bonus()))
+            sprite.getPosition().x + 47 / 2 - 12, sprite.getPosition().y + 28);
+        if ((map->is_not_overlap(obj, map->get_count_objects()) && is_not_outside(obj) &&
+            map->is_not_overlap_bonus(obj, map->get_count_bonus())) || is_in_the_barrier())
         {
             sprite.move(0, -speed * time);
         }
@@ -103,9 +124,9 @@ public:
         sprite.setTextureRect(IntRect(xTexture * 47, 39, 47, 56));
         Object obj;
         obj.SetPosition(sprite.getPosition().x - 47 / 2 + 12, sprite.getPosition().y - 28,
-                        sprite.getPosition().x + 47 / 2 - 12, sprite.getPosition().y + 28 + speed * time);
-        if (map->is_not_overlap(obj, map->get_count_objects()) &&
-            map->is_not_overlap_bonus(obj, map->get_count_bonus()))
+            sprite.getPosition().x + 47 / 2 - 12, sprite.getPosition().y + 28 + speed * time);
+        if ((map->is_not_overlap(obj, map->get_count_objects()) && is_not_outside(obj) &&
+            map->is_not_overlap_bonus(obj, map->get_count_bonus())) || is_in_the_barrier())
         {
             sprite.move(0, speed * time);
         }
@@ -117,7 +138,7 @@ public:
         clock_fps.restart();
         Object obj;
         obj.SetPosition(sprite.getPosition().x - 47 / 2 - 5, sprite.getPosition().y - 28 - 5,
-                        sprite.getPosition().x + 47 / 2 + 5, sprite.getPosition().y + 28 + 5);
+            sprite.getPosition().x + 47 / 2 + 5, sprite.getPosition().y + 28 + 5);
         if (!map->is_not_overlap_bonus(obj, map->get_count_bonus()))
         {
             map->bonus_open(map->number_bonus(obj, map->get_count_bonus()));

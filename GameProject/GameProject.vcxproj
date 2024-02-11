@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bonuses\Bonuses.h" />
+    <ClInclude Include="Bonuses\InvisibilityBonus.h" />
     <ClInclude Include="Bonuses\PacManBonus.h" />
     <ClInclude Include="Bonuses\RedDeadBonus.h" />
     <ClInclude Include="Game.h" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Maps\RedDeadMap.h" />
     <ClInclude Include="Maps\MapC.h" />
     <ClInclude Include="Maps\InvisibilityMap.h" />
+    <ClInclude Include="Obstacles\InvisibilityObstacles.h" />
     <ClInclude Include="Obstacles\Obstacles.h" />
     <ClInclude Include="Obstacles\PacManObstacles.h" />
     <ClInclude Include="Obstacles\RedDead_Obstacles.h" />

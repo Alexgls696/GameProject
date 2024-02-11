@@ -38,9 +38,6 @@
     <ClInclude Include="Maps\MapC.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Maps\MapD.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Bonuses\Bonuses.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -72,6 +69,24 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Bonuses\RedDeadBonus.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Maps\InvisibilityMap.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacles\PacManObstacles.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacles\RedDead_Obstacles.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Players\PlayerInvisibility.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Bonuses\InvisibilityBonus.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacles\InvisibilityObstacles.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

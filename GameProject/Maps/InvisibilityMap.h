@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include "Map.h"
 #include <fstream>
+#include "../Bonuses/InvisibilityBonus.h"
+#include "../Obstacles/InvisibilityObstacles.h"
 
 class InvisibilityMap : public Map
 {
@@ -19,7 +21,7 @@ private:
 public:
     InvisibilityMap()
     {
-        name="InvisibilityMap";
+        name = "InvisibilityMap";
         rect.setFillColor(Color::Cyan);
         srand(time(0));
         ifstream file("objects.txt");
@@ -41,8 +43,8 @@ public:
                 textures_objects[i].loadFromFile(name_file);
                 sprites_objects[i].setTexture(textures_objects[i]);
                 do {
-                    x = (rand() % 31) * 32;
-                    y = (rand() % 18) * 32;
+                    x = ((rand() % 29) + 1) * 32;
+                    y = ((rand() % 17) + 1) * 32;
                     Object obj;
                     obj.SetPosition(rect.getPosition().x + x - min_distance_objects, rect.getPosition().y + y - min_distance_objects,
                         rect.getPosition().x + x + width * 32 + min_distance_objects, rect.getPosition().y + y + height * 32 + min_distance_objects);
@@ -50,6 +52,8 @@ public:
                         break;
                     }
                 } while (true);
+                obstacles.push_back(new InvisibilityObstacles(&textures_objects[i]));
+                obstacles[i]->getSprite().setPosition(rect.getPosition().x + x, rect.getPosition().y + y);
                 objects[i].SetPosition(rect.getPosition().x + x, rect.getPosition().y + y, rect.getPosition().x + x + width * 32, rect.getPosition().y + y + height * 32);
                 sprites_objects[i].setPosition(rect.getPosition().x + x, rect.getPosition().y + y);
                 i++;
@@ -59,19 +63,22 @@ public:
         open_bonus.loadFromFile("Textures/chest_open.png");
         for (int i = 0; i < count_bonus; i++) {
             do {
-                x = (rand() % 31) * 32;
-                y = (rand() % 18) * 32;
+                x = ((rand() % 30) + 1) * 32;
+                y = ((rand() % 17) + 1) * 32;
                 Object obj;
-                obj.SetPosition(rect.getPosition().x + x - min_distance_objects, rect.getPosition().y + y - min_distance_objects, 
+                obj.SetPosition(rect.getPosition().x + x - min_distance_objects, rect.getPosition().y + y - min_distance_objects,
                     rect.getPosition().x + x + width * 32 + min_distance_objects, rect.getPosition().y + y + height * 32 + min_distance_objects);
                 if (is_not_overlap(obj, count_objects) && is_not_overlap_bonus(obj, i)) {
                     break;
                 }
             } while (true);
+            bonuses.push_back(new InvisibilityBonus);
+            bonuses[i]->getSprite().setPosition(rect.getPosition().x + x + 16, rect.getPosition().y + y + 16);
             sprites_bonus[i].setTexture(bonus);
             sprites_bonus[i].setPosition(rect.getPosition().x + x, rect.getPosition().y + y);
             objects_bonus[i].SetPosition(rect.getPosition().x + x, rect.getPosition().y + y, rect.getPosition().x + x + 32, rect.getPosition().y + y + 32);
         }
+        file.close();
     }
 
     void draw(RenderWindow& window) {
@@ -84,7 +91,7 @@ public:
         }
     }
     bool is_not_overlap(Object obj, int count = 12) {
-        if ((obj.x2 - min_distance_objects > rect.getPosition().x + 960) || (obj.y2 - min_distance_objects > rect.getPosition().y + 540)) {
+        if ((obj.x2 - min_distance_objects > rect.getPosition().x + 960 - 32) || (obj.y2 - min_distance_objects > rect.getPosition().y + 540 - 32)) {
             return false;
         }
         for (int i = 0; i < count; i++) {
@@ -122,6 +129,24 @@ public:
     void bonus_open(int number_bonus) {
         sprites_bonus[number_bonus].setTexture(open_bonus);
     }
-
+    bool checking_transition(Players* player) {
+        Object obj;
+        obj.SetPosition(player->getSprite().getPosition().x - player->getSprite().getTextureRect().width / 2,
+            player->getSprite().getPosition().y - player->getSprite().getTextureRect().height / 2,
+            player->getSprite().getPosition().x - player->getSprite().getTextureRect().width / 2 + 47,
+            player->getSprite().getPosition().y - player->getSprite().getTextureRect().height / 2 + 56);
+        if (is_not_overlap(obj, 12) && is_not_overlap_bonus(obj, 5)) {
+            return true;
+        }
+        return false;
+    }
+    bool check_win() {
+        for (int i = 0; i < count_bonus; i++) {
+            if (sprites_bonus[i].getTexture() != &open_bonus) {
+                return false;
+            }
+        }
+        return true;
+    }
 };
 
