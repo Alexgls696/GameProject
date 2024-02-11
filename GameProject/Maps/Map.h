@@ -86,7 +86,6 @@ public:
         return name;
     }
     
-    virtual void drawBonuses(RenderWindow&window) = 0;
 
     virtual void intersectBonuses(int index)
     {

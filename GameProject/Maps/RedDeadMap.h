@@ -12,59 +12,59 @@ public:
     {
         countBonuses = 3;
         countObstacles = 1;
-        for (int i = 0; i < countBonuses; i++)
-        {
-            bonuses.push_back(new RedDeadBonus);
-        }
-        int Ax = rect.getPosition().x + 55;
-        int Ay = rect.getPosition().y + 20;
-        int Bx = rect.getPosition().x + rect.getSize().x - 55;
-        int By = rect.getPosition().y + rect.getSize().y - 20;
-
-        for (int i = 0; i < countBonuses; i++)
-        {
-        link:
-            bonuses[i]->getSprite().setPosition(rand() % (Bx - Ax + 1) + Ax, rand() % (By - Ay + 1) + Ay);
-            for (int j = 0; j < countBonuses; j++)
-            {
-                if (i != j)
-                {
-                    if (bonuses[i]->getSprite().getGlobalBounds().intersects(bonuses[j]->getSprite().getGlobalBounds()))
-                    {
-                        i = 0;
-                        goto link;
-                    }
-                }
-            }
-        }
 
         for (int i = 0; i < countObstacles; i++)
         {
             obstacles.push_back(new RedDeadObstacles);
         }
-
-        Ax = rect.getPosition().x + 55;
-        Ay = rect.getPosition().y + 20;
-        Bx = rect.getPosition().x + rect.getSize().x - 276;
-        By = rect.getPosition().y + rect.getSize().y - 160;
+        
+        int Ax = rect.getPosition().x + 55;
+        int Ay = rect.getPosition().y + 20;
+        int Bx = rect.getPosition().x + rect.getSize().x - 340;
+        int By = rect.getPosition().y + rect.getSize().y - 250;
 
         for (int i = 0; i < countObstacles; i++)
         {
             link1:
-                obstacles[i]->getSprite().setPosition(rand() % (Bx - Ax + 1) + Ax, rand() % (By - Ay + 1) + Ay);
-            for (int j = 0; j < countBonuses; j++)
+            obstacles[i]->getSprite().setPosition(rand() % (Bx - Ax + 1) + Ax, rand() % (By - Ay + 1) + Ay);
+            for (int j = 0; j < obstacles.size(); j++)
             {
                 if (i != j)
                 {
-                    if (obstacles[i]->getSprite().getGlobalBounds().intersects(bonuses[j]->getSprite().getGlobalBounds()))
+                    if (obstacles[i]->getSprite().getGlobalBounds().intersects(obstacles[j]->getSprite().getGlobalBounds()))
                     {
                         i = 0;
                         goto link1;
                     }
                 }
             }
+            
         }
+        
+        for (int i = 0; i < countBonuses; i++)
+        {
+            bonuses.push_back(new RedDeadBonus);
+        }
+        Ax = rect.getPosition().x + 55;
+        Ay = rect.getPosition().y + 40;
+        Bx = rect.getPosition().x + rect.getSize().x - 55;
+        By = rect.getPosition().y + rect.getSize().y - 40;
 
+        for (int i = 0; i < countBonuses; i++)
+        {
+            link:
+                bonuses[i]->getSprite().setPosition(rand() % (Bx - Ax + 1) + Ax, rand() % (By - Ay + 1) + Ay);
+            for (int j = 0; j < countObstacles; j++)
+            {
+                if (bonuses[i]->getSprite().getGlobalBounds().intersects(obstacles[j]->getSprite().getGlobalBounds()))
+                {
+                    i = 0;
+                    goto link;
+                }
+           
+            }
+        }
+        
         name="RedDeadMap";
         rect.setFillColor(Color::White);
         texture.loadFromFile("Textures/Fon_desert.jpg");
@@ -75,11 +75,4 @@ public:
         window.draw(rect);
     }
     
-    void drawBonuses(RenderWindow& window) override
-    {
-        for(int  i = 0; i < countBonuses; i++)
-        {
-            bonuses[i]->draw(window);
-        }
-    }
 };

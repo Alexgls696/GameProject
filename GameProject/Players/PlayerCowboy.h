@@ -56,7 +56,7 @@ public:
 
         if (direction == RIGHT && sprite.getPosition().x + sprite.getTextureRect().width / 2 < WIDTH-25 && !flag_RIGHT)
         {
-            flag_UP = false;
+           flag_UP = false;
             flag_DOWN = false;
             flag_LEFT = false;
             flag_RIGHT = false;

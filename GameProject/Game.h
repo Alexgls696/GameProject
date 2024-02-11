@@ -69,7 +69,7 @@ public:
             }
         }
     }
-
+    
     void checkObstacles()
     {
         for(int i = 0; i < MAPS_COUNT; i++)
@@ -93,8 +93,8 @@ public:
     {
         int number = rand() % MAPS_COUNT;
         link:
-        playerPosition = Vector2f(maps[number]->getBoundsPosition()->x+rand()%(WIDTH/2-50)+50,
-            maps[number]->getBoundsPosition()->y+rand()%(HEIGHT/2-50)+50);
+        playerPosition = Vector2f(maps[number]->getBoundsPosition()[0].x+rand()%((WIDTH)/2-100)+100,
+            maps[number]->getBoundsPosition()[0].y+rand()%((HEIGHT)/2-100)+100);
         player->getSprite().setPosition(playerPosition);
         for(int i = 0; i < MAPS_COUNT ; i++)
         {
@@ -105,6 +105,18 @@ public:
                     .intersects(player->getSprite().getGlobalBounds()))
                 {
                    goto link;
+                }
+            }
+        }
+        for(int i = 0; i < MAPS_COUNT ; i++)
+        {
+            for(int j = 0; j < maps[i]->getObstacles().size() ; j++)
+            {
+                if(maps[i]->getObstacles()[j]->getSprite()
+                    .getGlobalBounds()
+                    .intersects(player->getSprite().getGlobalBounds()))
+                {
+                    goto link;
                 }
             }
         }
@@ -214,7 +226,6 @@ public:
                 {
                     game = false;
                     window.close();
-
                 }
             }
             for(int i = 0; i < MAPS_COUNT; i++)
@@ -223,17 +234,17 @@ public:
             }
             for(int i = 0; i < MAPS_COUNT; i++)
             {
-                for (int j = 0; j < maps[i]->getBonuses().size(); j++)
+                for (int j = 0; j < maps[i]->getObstacles().size(); j++)
                 {
-                    maps[i]->getBonuses()[j]->draw(window);
+                    maps[i]->getObstacles()[j]->draw(window);
                 }
             }
             
             for(int i = 0; i < MAPS_COUNT; i++)
             {
-                for (int j = 0; j < maps[i]->getObstacles().size(); j++)
+                for (int j = 0; j < maps[i]->getBonuses().size(); j++)
                 {
-                    maps[i]->getObstacles()[j]->draw(window);
+                    maps[i]->getBonuses()[j]->draw(window);
                 }
             }
             

@@ -41,13 +41,13 @@ public:
         switch(direction)
         {
         case LEFT:
-            sprite.move(Vector2f(-5,0)); break;
+            sprite.move(Vector2f(-3,0)); break;
         case RIGHT:
-            sprite.move(Vector2f(5,0)); break;
+            sprite.move(Vector2f(3,0)); break;
         case UP:
-            sprite.move(Vector2f(0,-5)); break;
+            sprite.move(Vector2f(0,-3)); break;
         case DOWN:
-            sprite.move(Vector2f(0,5)); break;
+            sprite.move(Vector2f(0,3)); break;
         case STOP:
             break;
         }

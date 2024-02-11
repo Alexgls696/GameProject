@@ -13,11 +13,4 @@ public:
     {
         window.draw(rect);
     }
-    void drawBonuses(RenderWindow& window) override
-    {
-        for(int  i = 0; i < countBonuses; i++)
-        {
-            bonuses[i]->draw(window);
-        }
-    }
 };
