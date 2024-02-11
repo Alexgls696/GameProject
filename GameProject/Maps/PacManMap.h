@@ -3,7 +3,7 @@
 #include "../Players//PlayerPacMan.h"
 #include "../Maps/Map.h"
 
-class PacManMap: public Map
+class PacManMap : public Map
 {
 public:
     PacManMap()

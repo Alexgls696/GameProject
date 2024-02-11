@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "../Library.h"
+#include "../Obstacles/Obstacles.h"
 #include "Bonuses/Bonuses.h"
 #include "Bonuses/PacManBonus.h"
 
@@ -7,7 +8,6 @@
 #define TWO sf::Vector2f(WIDTH/2,0)
 #define THREE sf::Vector2f(0,HEIGHT/2)
 #define FOUR sf::Vector2f(WIDTH/2,HEIGHT/2)
-
 
 /*----------------------------------------------
 Этот класс не трогаем!
@@ -23,7 +23,9 @@ protected:
     sf::Texture texture;
     string name;
     vector<Bonuses*>bonuses;
+    vector<Obstacles*>obstacles;;
     int countBonuses = 0;
+    int countObstacles = 0;
 public:
     bool active = false;
     //index 0 - левый верхний угол
@@ -83,8 +85,6 @@ public:
     {
         return name;
     }
-
-    
     
     virtual void drawBonuses(RenderWindow&window) = 0;
 
@@ -96,6 +96,10 @@ public:
     vector<Bonuses*>getBonuses() 
     {
         return bonuses;
+    }
+    vector<Obstacles*>getObstacles()
+    {
+        return obstacles;
     }
 };
 

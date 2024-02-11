@@ -21,6 +21,10 @@ public:
 
     void move() override
     {
+        if(obstacle)
+        {
+            
+        }
         time = clock.getElapsedTime().asMicroseconds();
         clock.restart();
         time = time / 800;

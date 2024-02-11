@@ -17,8 +17,14 @@ protected:
     RectangleShape rectangle_shape;
     Image image;
     bool fail = false; //проигрыш
-    bool pressed = false; 
+    bool pressed = false;
+    bool obstacle = false;
 public:
+    void setFlag(bool flag)
+    {
+        this->obstacle=flag;
+    }
+    
     virtual void draw(RenderWindow& window) = 0; //Рисуем вашего персонажа так, как нужно
     virtual void move() = 0; //Движение с помощью объекта direction - класс PlayerPacMan как пример
     virtual void Direction(Event&event) = 0; //Направление движения, пример тоже в классе PlayerPacMan
@@ -41,5 +47,4 @@ public:
             direction=STOP;
         }
     }
-    
 };

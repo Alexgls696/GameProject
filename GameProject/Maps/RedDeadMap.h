@@ -3,6 +3,7 @@
 #include "../Players//PlayerCowboy.h"
 #include "../Maps/Map.h"
 #include "../Bonuses/RedDeadBonus.h"
+#include "../Obstacles/RedDead_Obstacles.h"
 
 class RedDeadMap : public Map
 {
@@ -10,6 +11,7 @@ public:
     RedDeadMap()
     {
         countBonuses = 3;
+        countObstacles = 1;
         for (int i = 0; i < countBonuses; i++)
         {
             bonuses.push_back(new RedDeadBonus);
@@ -31,6 +33,33 @@ public:
                     {
                         i = 0;
                         goto link;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < countObstacles; i++)
+        {
+            obstacles.push_back(new RedDeadObstacles);
+        }
+
+        Ax = rect.getPosition().x + 55;
+        Ay = rect.getPosition().y + 20;
+        Bx = rect.getPosition().x + rect.getSize().x - 276;
+        By = rect.getPosition().y + rect.getSize().y - 160;
+
+        for (int i = 0; i < countObstacles; i++)
+        {
+            link1:
+                obstacles[i]->getSprite().setPosition(rand() % (Bx - Ax + 1) + Ax, rand() % (By - Ay + 1) + Ay);
+            for (int j = 0; j < countBonuses; j++)
+            {
+                if (i != j)
+                {
+                    if (obstacles[i]->getSprite().getGlobalBounds().intersects(bonuses[j]->getSprite().getGlobalBounds()))
+                    {
+                        i = 0;
+                        goto link1;
                     }
                 }
             }

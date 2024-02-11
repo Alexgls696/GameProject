@@ -22,6 +22,7 @@ private:
     time_t setPlayerTimer;
     bool setPlayerFlag;
 public:
+    
     Game() //Добавление карт, не трогаем
     {
         srand(time(0));
@@ -69,6 +70,25 @@ public:
         }
     }
 
+    void checkObstacles()
+    {
+        for(int i = 0; i < MAPS_COUNT; i++)
+        {
+            for(int j = 0; j < maps[i]->getObstacles().size() ; j++)
+            {
+                if(maps[i]->getObstacles()[j]->getSprite()
+                    .getGlobalBounds()
+                    .intersects(player->getSprite().getGlobalBounds()))
+                {
+                    player->setFlag(true);
+                }else
+                {
+                    player->setFlag(false);
+                }
+            }
+        }
+    }
+
     void setUpPlayerPosition()
     {
         int number = rand() % MAPS_COUNT;
@@ -78,7 +98,7 @@ public:
         player->getSprite().setPosition(playerPosition);
         for(int i = 0; i < MAPS_COUNT ; i++)
         {
-            for(int j = 0; j < maps[i]->getBonuses().size() ;j++)
+            for(int j = 0; j < maps[i]->getBonuses().size() ; j++)
             {
                 if(maps[i]->getBonuses()[j]->getSprite()
                     .getGlobalBounds()
@@ -154,11 +174,12 @@ public:
     time_t timer;
     void go()
     {
-        RenderWindow window(VideoMode(WIDTH,HEIGHT),"Game",Style::Fullscreen);
+        RenderWindow window(VideoMode(WIDTH,HEIGHT),"Game");
         window.setFramerateLimit(60);
         player=new PlayerPacMan;
         setUpPlayerPosition();
         timer = clock();//Второй поток с логикой игры
+
         thread logicThread([&]()
         {
             while(game)
@@ -170,6 +191,7 @@ public:
                     player->move();
                     player->checkBounds();
                     checkBonuses();
+                    checkObstacles();
                     playerPosition=player->getSprite().getPosition();
                 }
             }
@@ -185,11 +207,14 @@ public:
                 player->Direction(event);
                 if(event.type==Event::Closed)
                 {
+                    game = false;
                     window.close();
                 }
                 if(Keyboard::isKeyPressed(Keyboard::Escape))
                 {
+                    game = false;
                     window.close();
+
                 }
             }
             for(int i = 0; i < MAPS_COUNT; i++)
@@ -203,6 +228,15 @@ public:
                     maps[i]->getBonuses()[j]->draw(window);
                 }
             }
+            
+            for(int i = 0; i < MAPS_COUNT; i++)
+            {
+                for (int j = 0; j < maps[i]->getObstacles().size(); j++)
+                {
+                    maps[i]->getObstacles()[j]->draw(window);
+                }
+            }
+            
             for (int i = 0; i < MAPS_COUNT; i++)
                 window.draw(DrawWeb());
             player->draw(window);

@@ -3,6 +3,7 @@
 #include "../Library.h"
 using namespace sf;
 using namespace std;
+
 class PlayerPacMan : public Players
 {
 private:
