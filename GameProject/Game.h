@@ -177,7 +177,7 @@ public:
                         player->getSprite().setPosition(playerPosition);
                         continue;
                     }
-                    if (maps[i]->get_name()._Equal("InvisibilityMap") && maps[i]->active == false && maps[3]->checking_transition(player))
+                    if (maps[i]->get_name()._Equal("InvisibilityMap") && maps[i]->active == false)
                     {
                         setPassive(i);
                         maps[i]->active = true;
