@@ -8,6 +8,7 @@ private:
     Clock clock;
     float time;
     float speed = 0.1;
+    bool flag_UP = false, flag_DOWN = false, flag_LEFT = false, flag_RIGHT = false, flag_DOWNLEFT=false, flag_DOWNRIGHT=false, flag_UPLEFT=false, flag_UPRIGHT=false;
 public:
     PlayerCowboy()
     {
@@ -15,78 +16,150 @@ public:
         texture.loadFromFile("Textures/cowboy.png");
         sprite.setTexture(texture);
         sprite.setTextureRect(IntRect(10, 0, 60, 80));
-        sprite.setScale(1.5f, 1.5f);
+        //sprite.setScale(1.5f, 1.5f);
         sprite.setOrigin(sprite.getPosition().x + sprite.getTextureRect().width / 2, sprite.getPosition().y+sprite.getTextureRect().height/2); //изм
     }
 
     void move() override
     {
-        if(obstacle)
+        if(obstacle && !flag_UP && !flag_DOWN && !flag_LEFT && !flag_RIGHT && !flag_DOWNLEFT && !flag_DOWNRIGHT && !flag_UPLEFT && !flag_UPRIGHT)
         {
-            
+            if (direction == UP) flag_UP = true;
+            if (direction == DOWN) flag_DOWN = true;
+            if (direction == LEFT) flag_LEFT = true;
+            if (direction == RIGHT) flag_RIGHT = true;
+            if (direction == DOWN_LEFT) flag_DOWNLEFT = true;
+            if (direction == DOWN_RIGHT) flag_DOWNRIGHT = true;
+            if (direction == UP_LEFT) flag_UPLEFT = true;
+            if (direction == UP_RIGHT) flag_UPRIGHT = true;
         }
+
         time = clock.getElapsedTime().asMicroseconds();
         clock.restart();
         time = time / 800;
         
-        if(direction == LEFT && sprite.getPosition().x - sprite.getTextureRect().width / 2 > 15)
+        if(direction == LEFT && sprite.getPosition().x - sprite.getTextureRect().width / 2 > 15 && !flag_LEFT)
         {
+            flag_UP = false;
+            flag_DOWN = false;
+            flag_LEFT = false;
+            flag_RIGHT =false;
+            flag_DOWNLEFT = false;
+            flag_DOWNRIGHT = false;
+            flag_UPLEFT = false;
+            flag_UPRIGHT = false;
             CurrentFrame += 0.01 * time;
             if (CurrentFrame > 16) CurrentFrame -= 16;
             sprite.setTextureRect(IntRect(100 * int(CurrentFrame) + 10, 0, 60, 80));
             sprite.move(-speed * time, 0);
         }
 
-        if (direction == RIGHT && sprite.getPosition().x + sprite.getTextureRect().width / 2 < WIDTH-25)
+        if (direction == RIGHT && sprite.getPosition().x + sprite.getTextureRect().width / 2 < WIDTH-25 && !flag_RIGHT)
         {
+            flag_UP = false;
+            flag_DOWN = false;
+            flag_LEFT = false;
+            flag_RIGHT = false;
+            flag_DOWNLEFT = false;
+            flag_DOWNRIGHT = false;
+            flag_UPLEFT = false;
+            flag_UPRIGHT = false;
             CurrentFrame += 0.01 * time;
             if (CurrentFrame > 16) CurrentFrame -= 16;
             sprite.setTextureRect(IntRect(100 * int(CurrentFrame) + 20, 85, 60, 80));
             sprite.move(speed * time, 0);
         }
 
-        if (direction == UP && sprite.getPosition().y - sprite.getTextureRect().height / 2 > 10)
+        if (direction == UP && sprite.getPosition().y - sprite.getTextureRect().height / 2 > 10 && !flag_UP)
         {
+            flag_UP = false;
+            flag_DOWN = false;
+            flag_LEFT = false;
+            flag_RIGHT = false;
+            flag_DOWNLEFT = false;
+            flag_DOWNRIGHT = false;
+            flag_UPLEFT = false;
+            flag_UPRIGHT = false;
             CurrentFrame += 0.01 * time;
             if (CurrentFrame > 16) CurrentFrame -= 16;
             sprite.setTextureRect(IntRect(100 * int(CurrentFrame) + 10, 265, 60, 80));
             sprite.move(0, -speed * time);
         }
 
-        if (direction == DOWN && sprite.getPosition().y + sprite.getTextureRect().height / 2 < HEIGHT-40)
+        if (direction == DOWN && sprite.getPosition().y + sprite.getTextureRect().height / 2 < HEIGHT-40 && !flag_DOWN)
         {
+            flag_UP = false;
+            flag_DOWN = false;
+            flag_LEFT = false;
+            flag_RIGHT = false;
+            flag_DOWNLEFT = false;
+            flag_DOWNRIGHT = false;
+            flag_UPLEFT = false;
+            flag_UPRIGHT = false;
             CurrentFrame += 0.01 * time;
             if (CurrentFrame > 16) CurrentFrame -= 16;
             sprite.setTextureRect(IntRect(100 * int(CurrentFrame) + 10, 175, 60, 80));
             sprite.move(0, speed * time);
         }
 
-        if (direction == DOWN_LEFT && sprite.getPosition().y + sprite.getTextureRect().height / 2 < HEIGHT - 40 && sprite.getPosition().x - sprite.getTextureRect().width / 2 > 15)
+        if (direction == DOWN_LEFT && sprite.getPosition().y + sprite.getTextureRect().height / 2 < HEIGHT - 40 && sprite.getPosition().x - sprite.getTextureRect().width / 2 > 15 && !flag_DOWNLEFT)
         {
+            flag_UP = false;
+            flag_DOWN = false;
+            flag_LEFT = false;
+            flag_RIGHT = false;
+            flag_DOWNLEFT = false;
+            flag_DOWNRIGHT = false;
+            flag_UPLEFT = false;
+            flag_UPRIGHT = false;
             CurrentFrame += 0.01 * time;
             if (CurrentFrame > 16) CurrentFrame -= 16;
             sprite.setTextureRect(IntRect(100 * int(CurrentFrame) + 10, 355, 60, 80));
             sprite.move(-speed * time, speed * time);
         }
 
-        if (direction == DOWN_RIGHT && sprite.getPosition().y + sprite.getTextureRect().height / 2 < HEIGHT - 40 && sprite.getPosition().x + sprite.getTextureRect().width / 2 < WIDTH - 25)
+        if (direction == DOWN_RIGHT && sprite.getPosition().y + sprite.getTextureRect().height / 2 < HEIGHT - 40 && sprite.getPosition().x + sprite.getTextureRect().width / 2 < WIDTH - 25 && !flag_DOWNRIGHT)
         {
+            flag_UP = false;
+            flag_DOWN = false;
+            flag_LEFT = false;
+            flag_RIGHT = false;
+            flag_DOWNLEFT = false;
+            flag_DOWNRIGHT = false;
+            flag_UPLEFT = false;
+            flag_UPRIGHT = false;
             CurrentFrame += 0.01 * time;
             if (CurrentFrame > 16) CurrentFrame -= 16;
             sprite.setTextureRect(IntRect(100 * int(CurrentFrame) + 10, 445, 60, 80));
             sprite.move(speed * time, speed * time);
         }
 
-        if (direction == UP_LEFT && sprite.getPosition().y - sprite.getTextureRect().height / 2 > 10 && sprite.getPosition().x - sprite.getTextureRect().width / 2 > 15)
+        if (direction == UP_LEFT && sprite.getPosition().y - sprite.getTextureRect().height / 2 > 10 && sprite.getPosition().x - sprite.getTextureRect().width / 2 > 15 && !flag_UPLEFT)
         {
+            flag_UP = false;
+            flag_DOWN = false;
+            flag_LEFT = false;
+            flag_RIGHT = false;
+            flag_DOWNLEFT = false;
+            flag_DOWNRIGHT = false;
+            flag_UPLEFT = false;
+            flag_UPRIGHT = false;
             CurrentFrame += 0.01 * time;
             if (CurrentFrame > 16) CurrentFrame -= 16;
             sprite.setTextureRect(IntRect(100 * int(CurrentFrame) + 5, 535, 60, 78));
             sprite.move(-speed * time, -speed * time);
         }
 
-        if (direction == UP_RIGHT && sprite.getPosition().y - sprite.getTextureRect().height / 2 > 10 && sprite.getPosition().x + sprite.getTextureRect().width / 2 < WIDTH - 25)
+        if (direction == UP_RIGHT && sprite.getPosition().y - sprite.getTextureRect().height / 2 > 10 && sprite.getPosition().x + sprite.getTextureRect().width / 2 < WIDTH - 25 && !flag_UPRIGHT)
         {
+            flag_UP = false;
+            flag_DOWN = false;
+            flag_LEFT = false;
+            flag_RIGHT = false;
+            flag_DOWNLEFT = false;
+            flag_DOWNRIGHT = false;
+            flag_UPLEFT = false;
+            flag_UPRIGHT = false;
             CurrentFrame += 0.01 * time;
             if (CurrentFrame > 16) CurrentFrame -= 16;
             sprite.setTextureRect(IntRect(100 * int(CurrentFrame) + 10, 620, 60, 80));

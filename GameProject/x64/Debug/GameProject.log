@@ -1,220 +1,164 @@
 ﻿  Game.cpp
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerPacMan.h(59,53): warning C4244: =: преобразование "sf::Int64" в "float", возможна потеря данных
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerPacMan.h(63,30): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(16,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(16,16): warning C4244:         with
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(16,16): warning C4244:         [
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(16,16): warning C4244:             T=float
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(16,16): warning C4244:         ]
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(17,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(17,16): warning C4244:         with
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(17,16): warning C4244:         [
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(17,16): warning C4244:             T=float
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(17,16): warning C4244:         ]
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(18,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(18,16): warning C4244:         with
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(18,16): warning C4244:         [
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(18,16): warning C4244:             T=float
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(18,16): warning C4244:         ]
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(19,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(19,16): warning C4244:         with
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(19,16): warning C4244:         [
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(19,16): warning C4244:             T=float
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(19,16): warning C4244:         ]
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(24,85): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(24,65): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(10,19): warning C4305: инициализация: усечение из "double" в "float"
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(24,53): warning C4244: =: преобразование "sf::Int64" в "float", возможна потеря данных
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(30,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(38,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(46,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(54,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(62,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(70,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(78,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(86,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(17,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(17,16): warning C4244:         with
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(17,16): warning C4244:         [
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(17,16): warning C4244:             T=float
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(17,16): warning C4244:         ]
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(18,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(18,16): warning C4244:         with
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(18,16): warning C4244:         [
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(18,16): warning C4244:             T=float
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(18,16): warning C4244:         ]
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(19,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(19,16): warning C4244:         with
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(19,16): warning C4244:         [
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(19,16): warning C4244:             T=float
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(19,16): warning C4244:         ]
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(20,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(20,16): warning C4244:         with
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(20,16): warning C4244:         [
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(20,16): warning C4244:             T=float
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(20,16): warning C4244:         ]
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(25,101): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(25,72): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-  (компиляция исходного файла "Game.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Game.h(28,19): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-  (компиляция исходного файла "Game.cpp")
-  
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerPacMan.h(59,53): warning C4244: =: преобразование "sf::Int64" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerPacMan.h(63,30): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\PacManMap.h(16,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\PacManMap.h(17,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\PacManMap.h(18,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\PacManMap.h(19,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\PacManMap.h(24,85): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\PacManMap.h(24,65): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(10): warning C4305: инициализация: усечение из "double" в "float"
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(37,53): warning C4244: =: преобразование "sf::Int64" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(51,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(67,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(83,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(99,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(115,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(131,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(147,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(163,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(19,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(20,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(21,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(22,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(27,101): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(27,72): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(46,35): warning C4244: =: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(47,35): warning C4244: =: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(48,54): warning C4244: =: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(49,54): warning C4244: =: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(54,107): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(54,78): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Game.h(28,19): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
   main.cpp
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerPacMan.h(59,53): warning C4244: =: преобразование "sf::Int64" в "float", возможна потеря данных
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerPacMan.h(63,30): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(16,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(16,16): warning C4244:         with
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(16,16): warning C4244:         [
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(16,16): warning C4244:             T=float
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(16,16): warning C4244:         ]
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(17,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(17,16): warning C4244:         with
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(17,16): warning C4244:         [
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(17,16): warning C4244:             T=float
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(17,16): warning C4244:         ]
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(18,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(18,16): warning C4244:         with
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(18,16): warning C4244:         [
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(18,16): warning C4244:             T=float
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(18,16): warning C4244:         ]
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(19,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(19,16): warning C4244:         with
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(19,16): warning C4244:         [
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(19,16): warning C4244:             T=float
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(19,16): warning C4244:         ]
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(24,85): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\PacManMap.h(24,65): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(10,19): warning C4305: инициализация: усечение из "double" в "float"
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(24,53): warning C4244: =: преобразование "sf::Int64" в "float", возможна потеря данных
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(30,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(38,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(46,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(54,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(62,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(70,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(78,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Players\PlayerCowboy.h(86,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(17,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(17,16): warning C4244:         with
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(17,16): warning C4244:         [
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(17,16): warning C4244:             T=float
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(17,16): warning C4244:         ]
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(18,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(18,16): warning C4244:         with
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(18,16): warning C4244:         [
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(18,16): warning C4244:             T=float
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(18,16): warning C4244:         ]
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(19,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(19,16): warning C4244:         with
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(19,16): warning C4244:         [
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(19,16): warning C4244:             T=float
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(19,16): warning C4244:         ]
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(20,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(20,16): warning C4244:         with
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(20,16): warning C4244:         [
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(20,16): warning C4244:             T=float
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(20,16): warning C4244:         ]
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(25,101): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\RedDeadMap.h(25,72): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Game.h(28,19): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-  (компиляция исходного файла "main.cpp")
-  
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\main.cpp(8,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerPacMan.h(59,53): warning C4244: =: преобразование "sf::Int64" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerPacMan.h(63,30): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\PacManMap.h(16,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\PacManMap.h(17,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\PacManMap.h(18,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\PacManMap.h(19,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\PacManMap.h(24,85): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\PacManMap.h(24,65): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(10): warning C4305: инициализация: усечение из "double" в "float"
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(37,53): warning C4244: =: преобразование "sf::Int64" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(51,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(67,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(83,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(99,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(115,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(131,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(147,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Players\PlayerCowboy.h(163,34): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(19,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(20,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(21,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(22,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(27,101): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(27,72): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(46,35): warning C4244: =: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(47,35): warning C4244: =: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(48,54): warning C4244: =: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(49,54): warning C4244: =: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(54,107): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\RedDeadMap.h(54,78): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\Game.h(28,19): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\anenk\source\repos\GameProject\GameProject\main.cpp(8,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
   Создание кода...
-C:\Users\Alexandr\Desktop\Visual Programming\GameProject\GameProject\Maps\Map.h(45): warning C4172: возвращение адреса локальной или временной переменной : array
-  GameProject.vcxproj -> C:\Users\Alexandr\Desktop\Visual Programming\GameProject\x64\Debug\GameProject.exe
+C:\Users\anenk\source\repos\GameProject\GameProject\Maps\Map.h(46): warning C4172: возвращение адреса локальной или временной переменной : array
+  GameProject.vcxproj -> C:\Users\anenk\Source\Repos\GameProject\x64\Debug\GameProject.exe
