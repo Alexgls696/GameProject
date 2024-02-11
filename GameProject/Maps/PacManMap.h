@@ -16,7 +16,7 @@ public:
         {
             obstacles.push_back(new PacManObstacles);
             int rotationAngle[] = {0,90};
-            int A = 5; int B = 10;
+            int A = 7; int B = 10;
             double scale = rand()%(B-A+1)+A;
             obstacles[i]->getSprite().setScale(scale/10,scale/10);
             obstacles[i]->getSprite().setOrigin(obstacles[i]->getSprite().getPosition().x+texture.getSize().x,obstacles[i]->getSprite().getPosition().y+texture.getSize().y);

@@ -9,7 +9,6 @@
 #define WIDTH 1920
 #define HEIGHT 1080
 
-
 using namespace std;
 using namespace sf;
 
