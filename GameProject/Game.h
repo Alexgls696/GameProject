@@ -98,7 +98,7 @@ public:
         int number = rand() % MAPS_COUNT;
         link:
         playerPosition = Vector2f(maps[number]->getBoundsPosition()[0].x+rand()%((WIDTH)/2-100)+100,
-            maps[number]->getBoundsPosition()[0].y+rand()%((HEIGHT)/2-100)+100);
+            maps[number]->getBoundsPosition()[0].y+rand()%((HEIGHT)/2)+100-100);
         player->getSprite().setPosition(playerPosition);
         for(int i = 0; i < MAPS_COUNT ; i++)
         {

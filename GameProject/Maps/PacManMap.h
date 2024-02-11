@@ -9,8 +9,21 @@ class PacManMap : public Map
 public:
     PacManMap()
     {
-        countBonuses = 6;
-        countObstacles = 6;
+        if(WIDTH==1920&&HEIGHT==1080)
+        {
+            countBonuses = 6;
+            countObstacles = 6;
+        }
+        if(WIDTH==1600&&HEIGHT==900)
+        {
+            countBonuses = 4;
+            countObstacles = 4;
+        }
+        if(WIDTH==1280&&HEIGHT==720)
+        {
+            countBonuses = 3;
+            countObstacles = 3;
+        }
 
         for (int i = 0; i < countObstacles; i++)
         {
@@ -18,13 +31,14 @@ public:
             int rotationAngle[] = {0,90};
             int A = 7; int B = 10;
             double scale = rand()%(B-A+1)+A;
+            obstacles[i]->getSprite().setOrigin(obstacles[i]->getSprite().getPosition().x+texture.getSize().x,
+                obstacles[i]->getSprite().getPosition().y+texture.getSize().y);
             obstacles[i]->getSprite().setScale(scale/10,scale/10);
-            obstacles[i]->getSprite().setOrigin(obstacles[i]->getSprite().getPosition().x+texture.getSize().x,obstacles[i]->getSprite().getPosition().y+texture.getSize().y);
             obstacles[i]->getSprite().setRotation(rotationAngle[rand()%2]);
         }
         
-        int Ax = rect.getPosition().x + 120;
-        int Ay = rect.getPosition().y + 200;
+        int Ax = rect.getPosition().x + 75;
+        int Ay = rect.getPosition().y + 75;
         int Bx = rect.getPosition().x + rect.getSize().x - 200;
         int By = rect.getPosition().y + rect.getSize().y - 200;
 
