@@ -21,7 +21,7 @@ public:
         int Ax = rect.getPosition().x + 55;
         int Ay = rect.getPosition().y + 20;
         int Bx = rect.getPosition().x + rect.getSize().x - 340;
-        int By = rect.getPosition().y + rect.getSize().y - 250;
+        int By = rect.getPosition().y + rect.getSize().y - 330;
 
         for (int i = 0; i < countObstacles; i++)
         {
