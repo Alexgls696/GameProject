@@ -7,7 +7,6 @@ class Obstacles //Класс препятствий. Препятствия - н
 protected:
     Texture texture;
     Sprite sprite;
-    RectangleShape rectangle_shape;
     Image image;
     Vector2f position;
 public:

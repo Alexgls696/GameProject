@@ -9,6 +9,15 @@
 #define THREE sf::Vector2f(0,HEIGHT/2)
 #define FOUR sf::Vector2f(WIDTH/2,HEIGHT/2)
 
+struct Object {
+    double x1, y1, x2, y2;
+    void SetPosition(double x1, double y1, double x2, double y2) {
+        this->x1 = x1;
+        this->y1 = y1;
+        this->x2 = x2;
+        this->y2 = y2;
+    }
+};
 /*----------------------------------------------
 Этот класс не трогаем!
 ----------------------------------------------
@@ -32,6 +41,7 @@ public:
     //index 1 - левый нижний угол
     //index 2 - правый нижний угол
     //index 3 - правый верхний угол
+    
     virtual sf::Vector2f*getBoundsPosition()
     {
         sf::Vector2f one(rect.getPosition());
@@ -45,6 +55,7 @@ public:
         array[3]=four;
         return array;
     }
+    
     Map()
     {
         rect.setSize(sf::Vector2f(WIDTH/2,HEIGHT/2));
@@ -99,6 +110,25 @@ public:
     vector<Obstacles*>getObstacles()
     {
         return obstacles;
+    }
+    
+    virtual bool is_not_overlap(Object obj, int count) {
+        return true;
+    }
+    virtual bool is_not_overlap_bonus(Object obj, int count) {
+        return true;
+    }
+    virtual int get_count_objects() {
+        return 1;
+    }
+    virtual int get_count_bonus(){
+        return 1;
+    }
+    virtual int number_bonus(Object obj, int count) {
+        return 1;
+    }
+    virtual void bonus_open(int number_bonus) {
+
     }
 };
 

@@ -3,9 +3,10 @@
 #include "Maps/PacManMap.h"
 #include "Maps/RedDeadMap.h"
 #include "Maps/MapC.h"
-#include "Maps/MapD.h"
+#include "Maps\InvisibilityMap.h"
 #include "Players//RedPacMan.h"
 #include "Players/PlayerCowboy.h"
+#include "Players/PlayerInvisibility.h"
 #include <thread>
 #include <time.h>
 //Изменения в Visual Studio
@@ -30,7 +31,7 @@ public:
         maps[0]=new PacManMap();
         maps[1]=new RedDeadMap;
         maps[2]=new MapC;
-        maps[3]=new MapD;
+        maps[3]=new InvisibilityMap;
         score = 0;
         setPlayerFlag=clock();
     }
@@ -52,7 +53,7 @@ public:
         VertLine[3].color=Color(0,0,0);
         return VertLine;
     }
-
+    
     void checkBonuses()
     {
         for(int i = 0; i < MAPS_COUNT; i++)
@@ -175,6 +176,15 @@ public:
                         player->getSprite().setPosition(playerPosition);
                         continue;;
                     }
+                    if (maps[i]->get_name()._Equal("InvisibilityMap") && maps[i]->active == false)
+                    {
+                        setPassive(i);
+                        maps[i]->active = true;
+                        setPlayerFlag = false;
+                        player = new PlayerInvisibility(maps[i]);
+                        player->getSprite().setPosition(playerPosition);
+                        continue;
+                    }
                 };
             }
         }else
@@ -190,7 +200,7 @@ public:
     time_t timer;
     void go()
     {
-        RenderWindow window(VideoMode(WIDTH,HEIGHT),"Game");
+        RenderWindow window(VideoMode(WIDTH,HEIGHT),"Game",Style::Fullscreen);
         window.setFramerateLimit(60);
         player=new PlayerPacMan;
         setUpPlayerPosition();

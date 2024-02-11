@@ -1,0 +1,6 @@
+12 64 5
+Textures/house.png 6 5 1
+Textures/tree.png 4 5 2
+Textures/stone.png 2 2 3
+Textures/bush.png 1 1 3
+Textures/bush_empty.png 1 1 3
