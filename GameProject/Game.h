@@ -174,7 +174,7 @@ public:
                         setPlayerFlag=false;
                         player=new PlayerCowboy;
                         player->getSprite().setPosition(playerPosition);
-                        continue;;
+                        continue;
                     }
                     if (maps[i]->get_name()._Equal("InvisibilityMap") && maps[i]->active == false)
                     {

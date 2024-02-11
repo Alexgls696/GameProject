@@ -97,7 +97,6 @@ public:
         return name;
     }
     
-
     virtual void intersectBonuses(int index)
     {
         bonuses.at(index)->getSprite().setPosition(-500,-500);

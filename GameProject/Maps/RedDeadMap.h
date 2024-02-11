@@ -11,12 +11,11 @@ public:
     RedDeadMap()
     {
         countBonuses = 3;
-        countObstacles = 1;
+        countObstacles = 3;
 
-        for (int i = 0; i < countObstacles; i++)
-        {
-            obstacles.push_back(new RedDeadObstacles);
-        }
+        obstacles.push_back(new RedDeadObstacles2);
+        obstacles.push_back(new RedDeadObstacles2);
+        obstacles.push_back(new RedDeadObstacles);
         
         int Ax = rect.getPosition().x + 55;
         int Ay = rect.getPosition().y + 20;
@@ -37,8 +36,7 @@ public:
                         goto link1;
                     }
                 }
-            }
-            
+            } 
         }
         
         for (int i = 0; i < countBonuses; i++)
@@ -64,7 +62,6 @@ public:
            
             }
         }
-        
         name="RedDeadMap";
         rect.setFillColor(Color::White);
         texture.loadFromFile("Textures/Fon_desert.jpg");
@@ -74,5 +71,4 @@ public:
     {
         window.draw(rect);
     }
-    
 };
