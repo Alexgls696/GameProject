@@ -7,8 +7,6 @@
 #include "Players//RedPacMan.h"
 #include "Players/PlayerCowboy.h"
 #include "Players/PlayerInvisibility.h"
-#include <thread>
-#include <time.h>
 
 //Изменения в Visual Studio
 class Game
@@ -16,15 +14,26 @@ class Game
 private:
     Map** maps = nullptr;
     Players* player = nullptr;
-    //-------------------------------------------------
-    //Добавляем сюда ваш новый объект Player
-    Vector2f playerPosition;
+    Vector2f playerPosition; //перемещение между картами
     int score = 0;
+    time_t setPlayerTimer; 
+    bool setPlayerFlag; //Против мерцания на границах карт
+    
     bool game = true;
-    time_t setPlayerTimer;
-    bool setPlayerFlag;
-    int mapIndex = -1;
-    int obstacleIndex = -1;
+    bool win = false;
+    bool loose = false;
+    
+    int mapIndex = -1; //Проверка контакта с препятствием только на одной карте
+    int obstacleIndex = -1; //Проверки контакта с последним препятствием
+    int MaxCountBonuses = 0; //Число бонусов для победы
+    int totalCountBonuses = 0; //текущее число бонусов
+
+    Font timerFont;
+    Text timerText;
+    int minutes = 1;
+    int seconds = 30; //+1 секунда от нужного времени (для синхр потоков)
+    Color timeColor = Color::Cyan;
+    time_t timeTimer;
 
 public:
     Game() //Добавление карт, не трогаем
@@ -36,12 +45,55 @@ public:
         maps[2] = new MapC;
         maps[3] = new InvisibilityMap;
         score = 0;
+        
         setPlayerFlag = clock();
+        timerFont.loadFromFile("font2.ttf");
+        timerText.setFont(timerFont);
+        timerText.setFillColor(timeColor);
+        timerText.setOutlineThickness(2);
+        timerText.setCharacterSize(40);
+        timerText.setPosition(WIDTH / 2 -34, 5);
+        timerText.setOutlineColor(Color::Black);
+
+        timeTimer = clock();
+        timerText.setString(to_string(minutes) + ":" + to_string(seconds));
     }
 
     ~Game()
     {
         delete[]maps;
+    }
+
+    void timerWork()
+    {
+        string str;
+        bool colorFlag = true;
+        while (game)
+        {
+            if (seconds >= 0)
+            {
+                seconds--;
+                timerText.setString(to_string(minutes) + ":" + to_string(seconds));
+            }
+            else
+            {
+                seconds = 59;
+                timerText.setString(to_string(--minutes) + ":" + to_string(seconds));
+            }
+            if(minutes==0&&seconds<=10)
+            {
+                if(colorFlag)
+                {
+                    timerText.setFillColor(Color::Red);
+                    colorFlag=false;
+                }else
+                {
+                    timerText.setFillColor(timeColor);
+                    colorFlag=true; 
+                }
+            }
+            this_thread::sleep_for(chrono::milliseconds(1000));
+        }
     }
 
     VertexArray DrawWeb() //Сетка
@@ -58,6 +110,14 @@ public:
         return VertLine;
     }
 
+    void calculateCountBonuses()
+    {
+        for (int i = 0; i < MAPS_COUNT; i++)
+        {
+            MaxCountBonuses += maps[i]->getBonuses().size();
+        }
+    }
+
     void checkBonuses()
     {
         for (int i = 0; i < MAPS_COUNT; i++)
@@ -70,8 +130,19 @@ public:
                 {
                     score += 100;
                     maps[i]->intersectBonuses(j);
+                    totalCountBonuses++;
                 }
             }
+        }
+    }
+
+    void checkTotalBonuses()
+    {
+        if (totalCountBonuses == MaxCountBonuses)
+        {
+            win = true;
+            cout << "Game win!" << endl;
+            //game = false; 
         }
     }
 
@@ -124,7 +195,7 @@ public:
         By = maps[number]->getBoundsPosition()[3].y - 80;
 
     link:
-        playerPosition = Vector2f(rand() %(Bx-Ax+1)+Ax, rand() %(By-Ay+1)+Ay);
+        playerPosition = Vector2f(rand() % (Bx - Ax + 1) + Ax, rand() % (By - Ay + 1) + Ay);
         player->getSprite().setPosition(playerPosition);
         for (int j = 0; j < maps[number]->getBonuses().size(); j++)
         {
@@ -222,33 +293,51 @@ public:
 
     void go()
     {
-        RenderWindow window(VideoMode(WIDTH, HEIGHT), "Game",Style::Fullscreen);
+        RenderWindow window(VideoMode(WIDTH, HEIGHT), "Game");
         window.setFramerateLimit(60);
         player = new PlayerPacMan;
-        setUpPlayerPosition();
+        setUpPlayerPosition(); //Устанавливаем позацию игрока
+        calculateCountBonuses(); // считаем общее число бонусов
         game = true;
-        timer = clock(); //Второй поток с логикой игры
+
+        //Второй поток с логикой игры
         thread logicThread([&]()
         {
             while (game)
             {
-                if (clock() - timer > 9)
-                {
-                    timer = clock();
-                    setPlayer();
-                    player->move();
-                    player->checkBounds();
-                    player->checkBounds(game);
-                    checkBonuses();
-                    checkObstacles();
-                    playerPosition = player->getSprite().getPosition();
-                }
+                timer = clock();
+                setPlayer();
+                player->move();
+                player->checkBounds(); //общие границы
+                player->checkBounds(game); //границы для пакмана
+                checkBonuses();
+                checkObstacles();
+                playerPosition = player->getSprite().getPosition();
+                checkTotalBonuses(); // условие победы
+                this_thread::sleep_for(chrono::milliseconds(9));
             }
         });
 
+        //ТАЙМЕР
+        thread timerThread([&]()
+        {
+            if (game)
+            {
+                timerWork();
+            }
+        });
+
+        timerThread.detach();
         logicThread.detach();
+
         while (window.isOpen() && game)
         {
+            if (minutes == 0 && seconds == 0) //Окончание игры
+            {
+                loose = true;
+                game = false;
+            }
+            
             window.clear(Color(255, 255, 255));
             Event event;
             while (window.pollEvent(event))
@@ -289,6 +378,7 @@ public:
                     maps[i]->getBonuses()[j]->draw(window);
                 }
             }
+            window.draw(timerText);
 
 
             window.display();
