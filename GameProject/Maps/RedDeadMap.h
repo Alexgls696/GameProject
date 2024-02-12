@@ -110,8 +110,8 @@ public:
                 switch (player->getDirection())
                 {
                 case LEFT:
-                    bulletSprite.setPosition(player->getSprite().getPosition().x + 30,
-                                             player->getSprite().getPosition().y - 10);
+                    bulletSprite.setPosition(player->getSprite().getPosition().x - 40,
+                                             player->getSprite().getPosition().y - 25);
                     bulletDirection = LEFT;
                     break;
                 case RIGHT:
@@ -120,12 +120,12 @@ public:
                     bulletDirection = RIGHT;
                     break;
                 case DOWN:
-                    bulletSprite.setPosition(player->getSprite().getPosition().x,
+                    bulletSprite.setPosition(player->getSprite().getPosition().x+5,
                                              player->getSprite().getPosition().y + 60);
                     bulletDirection = DOWN;
                     break;
                 case UP:
-                    bulletSprite.setPosition(player->getSprite().getPosition().x,
+                    bulletSprite.setPosition(player->getSprite().getPosition().x+5,
                                              player->getSprite().getPosition().y - 60);
                     bulletDirection = UP;
                     break;
