@@ -105,7 +105,7 @@ public:
         {
             if (player->getBullet() && player->getFrame() > 8&&player->getFrame() < 9)
             {
-                player->getBullet() = false;
+                player->getBullet() = false; 
                 fire = true;
                 switch (player->getDirection())
                 {

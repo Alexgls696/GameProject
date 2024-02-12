@@ -31,7 +31,7 @@ private:
     Font timerFont;
     Text timerText;
     int minutes = 1;
-    int seconds = 30; //+1 секунда от нужного времени (для синхр потоков)
+    int seconds = 31;  //+1 сек
     Color timeColor = Color::Cyan;
     time_t timeTimer;
 
@@ -45,7 +45,6 @@ public:
         maps[2] = new MapC;
         maps[3] = new InvisibilityMap;
         score = 0;
-        
         setPlayerFlag = clock();
         timerFont.loadFromFile("font2.ttf");
         timerText.setFont(timerFont);
@@ -54,7 +53,6 @@ public:
         timerText.setCharacterSize(40);
         timerText.setPosition(WIDTH / 2 -34, 5);
         timerText.setOutlineColor(Color::Black);
-
         timeTimer = clock();
         timerText.setString(to_string(minutes) + ":" + to_string(seconds));
     }
@@ -70,7 +68,12 @@ public:
         bool colorFlag = true;
         while (game)
         {
-            if (seconds >= 0)
+            if (minutes == 0 && seconds == 0) //Окончание игры
+            {
+                loose = true;
+                game = false;
+            }
+            if (seconds > 0)
             {
                 seconds--;
                 timerText.setString(to_string(minutes) + ":" + to_string(seconds));
@@ -332,11 +335,7 @@ public:
 
         while (window.isOpen() && game)
         {
-            if (minutes == 0 && seconds == 0) //Окончание игры
-            {
-                loose = true;
-                game = false;
-            }
+           
             
             window.clear(Color(255, 255, 255));
             Event event;
