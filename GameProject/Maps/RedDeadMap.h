@@ -103,7 +103,7 @@ public:
         window.draw(rect);
         if (player != nullptr)
         {
-            if (player->getBullet() && player->getFrame() > 8)
+            if (player->getBullet() && player->getFrame() > 8&&player->getFrame() < 9)
             {
                 player->getBullet() = false;
                 fire = true;
