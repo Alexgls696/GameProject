@@ -32,8 +32,8 @@ public:
         bottleSprite.setTexture(bottleTexture);
         bottleSprite.setTexture(bottleTexture);
 
-        countBonuses = 3;
-        countObstacles = 2;
+        countBonuses = 15;
+        countObstacles = 3;
         obstacles.push_back(new RedDeadObstacles);
         obstacles.push_back(new RedDeadObstacles2);
         obstacles.push_back(new RedDeadObstacles2);
@@ -86,7 +86,6 @@ public:
                 {
                     if (bonuses[i]->getSprite().getGlobalBounds().intersects(bonuses[j]->getSprite().getGlobalBounds()))
                     {
-                        cout << i << " " << endl;
                         goto link;
                     }
                 }
