@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include "../Library.h"
 using namespace sf;
-
 class Obstacles //Класс препятствий. Препятствия - наследники
 {
 protected:

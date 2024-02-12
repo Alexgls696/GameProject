@@ -22,6 +22,7 @@ private:
     bool game = true;
     time_t setPlayerTimer;
     bool setPlayerFlag;
+    int mapIndex = -1;
 public:
 
     Game() //Добавление карт, не трогаем
@@ -77,24 +78,37 @@ public:
         {
             for (int j = 0; j < maps[i]->getObstacles().size(); j++)
             {
-                if (maps[i]->getObstacles()[j]->getSprite()
-                    .getGlobalBounds()
-                    .intersects(player->getSprite().getGlobalBounds()))
+                if(mapIndex==-1)
                 {
-                    player->setFlag(true);
-                    if (maps[i]->get_name() == "PacManMap")
+                    
+                    if (maps[i]->getObstacles()[j]->getSprite()
+                        .getGlobalBounds()
+                        .intersects(player->getSprite().getGlobalBounds()))
                     {
-                        game = false;
+                        player->setFlag(true);
+                        mapIndex = i;
+                        if (maps[i]->get_name() == "PacManMap")
+                        {
+                            game = false;
+                        }
                     }
-                }
-                else
+                }else
                 {
-                    player->setFlag(false);
+                    if(i==mapIndex)
+                    {
+                        if(!maps[mapIndex]->getObstacles()[j]->getSprite()
+                            .getGlobalBounds()
+                            .intersects(player->getSprite().getGlobalBounds()))
+                        {
+                            player->setFlag(false);
+                            mapIndex=-1;
+                        }
+                    }
                 }
             }
         }
     }
-
+    
     void setUpPlayerPosition()
     {
         int number = rand() % MAPS_COUNT;
@@ -202,7 +216,7 @@ public:
     time_t timer;
     void go()
     {
-        RenderWindow window(VideoMode(WIDTH, HEIGHT), "Game");
+        RenderWindow window(VideoMode(WIDTH, HEIGHT), "Game", Style::Fullscreen);
         window.setFramerateLimit(60);
         player = new PlayerPacMan;
         setUpPlayerPosition();

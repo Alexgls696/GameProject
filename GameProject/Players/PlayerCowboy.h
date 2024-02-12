@@ -68,7 +68,7 @@ public:
             sprite.move(0, -speed * time);
         }
 
-        if (direction == DOWN && sprite.getPosition().y + sprite.getTextureRect().height / 2 < HEIGHT-40 && !flag_DOWN)
+        if (direction == DOWN && sprite.getPosition().y + sprite.getTextureRect().height / 2 < HEIGHT-10 && !flag_DOWN)
         {
             flag_UP = false;
             CurrentFrame += 0.01 * time;
