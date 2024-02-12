@@ -84,20 +84,21 @@ public:
             break;
         }
     }
-
-    void checkBounds() override
+    
+    void checkBounds(bool& game) override
     {
         if(sprite.getPosition().x-sprite.getTextureRect().width/2 <0 ||sprite.getPosition().x+sprite.getTextureRect().width/2>WIDTH)
         {
+            game=false;
             direction=STOP;
-            fail=true;
         }
         if(sprite.getPosition().y-sprite.getTextureRect().height/2 <0 ||sprite.getPosition().y+sprite.getTextureRect().height/2>HEIGHT)
         {
+            game=false;
             direction=STOP;
-            fail=true;
         }
     }
+    
     void setFlag(bool flag) override
     {
         flag=false;
