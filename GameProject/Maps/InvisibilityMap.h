@@ -3,6 +3,7 @@
 #include <fstream>
 #include "../Bonuses/InvisibilityBonus.h"
 #include "../Obstacles/InvisibilityObstacles.h"
+#include "../Players/PlayerInvisibility.h"
 
 class InvisibilityMap : public Map
 {
@@ -23,6 +24,7 @@ public:
     {
         name = "InvisibilityMap";
         rect.setFillColor(Color::Cyan);
+        player= new PlayerInvisibility(this);
         srand(time(0));
         ifstream file("objects.txt");
         file >> count_objects;
@@ -147,6 +149,11 @@ public:
             }
         }
         return true;
+    }
+    Players*getPlayer() override
+    {
+        player = new PlayerInvisibility(this);
+        return player;
     }
 };
 

@@ -3,10 +3,7 @@
 using namespace std;
 using namespace sf;
 
-enum Direction //НАПРАВЛЕНИЯ ДВИЖЕНИЯ
-{
-    STOP,LEFT,RIGHT,UP,DOWN
-};
+
 
 class Players
 {
@@ -19,6 +16,9 @@ protected:
     bool fail = false; //проигрыш
     bool pressed = false;
     bool obstacle = false;
+    bool flag_bullet=false;
+    bool flag_bullet_animation=false;
+    float CurrentFrame = 0;
 public:
     virtual void setFlag(bool flag)
     {
@@ -36,15 +36,32 @@ public:
     {
         return sprite;
     }
-    virtual void checkBounds() //переопределите в наследнике, если нужно
+    virtual void checkBounds() //переопределите в наследнике
     {
-        if(sprite.getPosition().x-texture.getSize().x/2 <0 ||sprite.getPosition().x+texture.getSize().x/2>1920)
-        {
-            direction=STOP;
-        }
-        if(sprite.getPosition().y-texture.getSize().y/2 <0 ||sprite.getPosition().y+texture.getSize().y/2>1080)
-        {
-            direction=STOP;
-        }
+       
+    }
+
+    virtual void checkBounds(bool&game)
+    {
+        
+    }
+
+    bool&getBullet()
+    {
+        return flag_bullet;
+    }
+
+    virtual enum Direction getDirection()
+    {
+        return direction;
+    }
+
+    virtual void setBullet(bool flag_bullet)
+    {
+        this->flag_bullet = flag_bullet;
+    }
+    float getFrame()
+    {
+        return CurrentFrame;
     }
 };

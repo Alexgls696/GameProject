@@ -3,16 +3,17 @@
 #include "../Players//PlayerPacMan.h"
 #include "../Maps/Map.h"
 #include "../Obstacles/PacManObstacles.h"
-
+#include "../Players/PlayerPacMan.h"
 class PacManMap : public Map
 {
 public:
     PacManMap()
     {
+        player=new PlayerPacMan;
         if(WIDTH==1920&&HEIGHT==1080)
         {
-            countBonuses = 6;
-            countObstacles = 6;
+            countBonuses = rand() % (6-3+1)+3;
+            countObstacles = rand() %(6-3+1)+3;;
         }
         if(WIDTH==1600&&HEIGHT==900)
         {
@@ -94,6 +95,12 @@ public:
     void draw(RenderWindow& window) override
     {
         window.draw(rect);
+    }
+
+    Players*getPlayer() override
+    {
+        player = new PlayerPacMan;
+        return  player;
     }
     
     

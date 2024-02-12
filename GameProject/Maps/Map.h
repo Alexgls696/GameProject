@@ -33,6 +33,7 @@ protected:
     string name;
     vector<Bonuses*>bonuses;
     vector<Obstacles*>obstacles;
+    Players*player=nullptr;
     int countBonuses = 0;
     int countObstacles = 0;
 public:
@@ -135,5 +136,15 @@ public:
     virtual bool check_win() {
         return false;
     }
+
+    virtual Players* getPlayer()
+    {
+        return player;
+    }
+    
+    void setPlayer(Players* player)
+    {
+        this->player = player;
+    }    
 };
 

@@ -3,7 +3,7 @@
 #include "Maps/PacManMap.h"
 #include "Maps/RedDeadMap.h"
 #include "Maps/MapC.h"
-#include "Maps\InvisibilityMap.h"
+#include "Maps/InvisibilityMap.h"
 #include "Players//RedPacMan.h"
 #include "Players/PlayerCowboy.h"
 #include "Players/PlayerInvisibility.h"
@@ -23,6 +23,7 @@ private:
     time_t setPlayerTimer;
     bool setPlayerFlag;
     int mapIndex = -1;
+    int obstacleIndex = -1;
 public:
 
     Game() //Добавление карт, не трогаем
@@ -87,6 +88,7 @@ public:
                     {
                         player->setFlag(true);
                         mapIndex = i;
+                        obstacleIndex = j;
                         if (maps[i]->get_name() == "PacManMap")
                         {
                             game = false;
@@ -94,7 +96,7 @@ public:
                     }
                 }else
                 {
-                    if(i==mapIndex)
+                    if(i==mapIndex&&obstacleIndex==j)
                     {
                         if(!maps[mapIndex]->getObstacles()[j]->getSprite()
                             .getGlobalBounds()
@@ -102,6 +104,7 @@ public:
                         {
                             player->setFlag(false);
                             mapIndex=-1;
+                            obstacleIndex=-1;
                         }
                     }
                 }
@@ -169,7 +172,7 @@ public:
                         setPassive(i);
                         maps[i]->active = true;
                         setPlayerFlag = false;
-                        player = new PlayerPacMan;
+                        player = maps[i]->getPlayer();
                         player->getSprite().setPosition(playerPosition);
                         continue;
                     }
@@ -178,7 +181,7 @@ public:
                         setPassive(i);
                         maps[i]->active = true;
                         setPlayerFlag = false;
-                        player = new PlayerRedPacMan;
+                        player = maps[i]->getPlayer();
                         player->getSprite().setPosition(playerPosition);
                         continue;
                     }
@@ -187,7 +190,7 @@ public:
                         setPassive(i);
                         maps[i]->active = true;
                         setPlayerFlag = false;
-                        player = new PlayerCowboy;
+                        player = maps[i]->getPlayer();
                         player->getSprite().setPosition(playerPosition);
                         continue;
                     }
@@ -196,7 +199,7 @@ public:
                         setPassive(i);
                         maps[i]->active = true;
                         setPlayerFlag = false;
-                        player = new PlayerInvisibility(maps[i]);
+                        player = maps[i]->getPlayer();
                         player->getSprite().setPosition(playerPosition);
                         continue;
                     }
@@ -212,11 +215,11 @@ public:
             }
         }
     }
-
+    
     time_t timer;
     void go()
     {
-        RenderWindow window(VideoMode(WIDTH, HEIGHT), "Game", Style::Fullscreen);
+        RenderWindow window(VideoMode(WIDTH, HEIGHT), "Game");
         window.setFramerateLimit(60);
         player = new PlayerPacMan;
         setUpPlayerPosition();
@@ -232,6 +235,7 @@ public:
                         setPlayer();
                         player->move();
                         player->checkBounds();
+                        player->checkBounds(game);
                         checkBonuses();
                         checkObstacles();
                         playerPosition = player->getSprite().getPosition();
@@ -261,7 +265,12 @@ public:
             for (int i = 0; i < MAPS_COUNT; i++)
             {
                 maps[i]->draw(window);
-            }
+            } 
+            for (int i = 0; i < MAPS_COUNT; i++)
+                window.draw(DrawWeb());
+            
+            player->draw(window);
+            
             for (int i = 0; i < MAPS_COUNT; i++)
             {
                 for (int j = 0; j < maps[i]->getObstacles().size(); j++)
@@ -278,9 +287,8 @@ public:
                 }
             }
 
-            for (int i = 0; i < MAPS_COUNT; i++)
-                window.draw(DrawWeb());
-            player->draw(window);
+           
+            
             window.display();
         }
     }
