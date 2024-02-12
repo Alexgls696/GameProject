@@ -38,11 +38,11 @@ protected:
     int countObstacles = 0;
 public:
     bool active = false;
+    
     //index 0 - левый верхний угол
     //index 1 - левый нижний угол
     //index 2 - правый нижний угол
     //index 3 - правый верхний угол
-
     virtual sf::Vector2f* getBoundsPosition()
     {
         sf::Vector2f one(rect.getPosition());

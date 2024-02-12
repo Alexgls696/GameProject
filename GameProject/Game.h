@@ -9,6 +9,7 @@
 #include "Players/PlayerInvisibility.h"
 #include <thread>
 #include <time.h>
+
 //Изменения в Visual Studio
 class Game
 {
@@ -24,12 +25,12 @@ private:
     bool setPlayerFlag;
     int mapIndex = -1;
     int obstacleIndex = -1;
-public:
 
+public:
     Game() //Добавление карт, не трогаем
     {
         srand(time(0));
-        maps = new Map * [MAPS_COUNT];
+        maps = new Map*[MAPS_COUNT];
         maps[0] = new PacManMap();
         maps[1] = new RedDeadMap;
         maps[2] = new MapC;
@@ -37,6 +38,7 @@ public:
         score = 0;
         setPlayerFlag = clock();
     }
+
     ~Game()
     {
         delete[]maps;
@@ -63,8 +65,8 @@ public:
             for (int j = 0; j < maps[i]->getBonuses().size(); j++)
             {
                 if (maps[i]->getBonuses()[j]->getSprite()
-                    .getGlobalBounds()
-                    .intersects(player->getSprite().getGlobalBounds()))
+                                            .getGlobalBounds()
+                                            .intersects(player->getSprite().getGlobalBounds()))
                 {
                     score += 100;
                     maps[i]->intersectBonuses(j);
@@ -79,12 +81,11 @@ public:
         {
             for (int j = 0; j < maps[i]->getObstacles().size(); j++)
             {
-                if(mapIndex==-1)
+                if (mapIndex == -1)
                 {
-                    
                     if (maps[i]->getObstacles()[j]->getSprite()
-                        .getGlobalBounds()
-                        .intersects(player->getSprite().getGlobalBounds()))
+                                                  .getGlobalBounds()
+                                                  .intersects(player->getSprite().getGlobalBounds()))
                     {
                         player->setFlag(true);
                         mapIndex = i;
@@ -94,53 +95,53 @@ public:
                             game = false;
                         }
                     }
-                }else
+                }
+                else
                 {
-                    if(i==mapIndex&&obstacleIndex==j)
+                    if (i == mapIndex && obstacleIndex == j)
                     {
-                        if(!maps[mapIndex]->getObstacles()[j]->getSprite()
-                            .getGlobalBounds()
-                            .intersects(player->getSprite().getGlobalBounds()))
+                        if (!maps[mapIndex]->getObstacles()[j]->getSprite()
+                                                              .getGlobalBounds()
+                                                              .intersects(player->getSprite().getGlobalBounds()))
                         {
                             player->setFlag(false);
-                            mapIndex=-1;
-                            obstacleIndex=-1;
+                            mapIndex = -1;
+                            obstacleIndex = -1;
                         }
                     }
                 }
             }
         }
     }
-    
+
     void setUpPlayerPosition()
     {
         int number = rand() % MAPS_COUNT;
+        int Ax, Ay, Bx, By;
+        Ax = maps[number]->getBoundsPosition()[0].x + 80;
+        Ay = maps[number]->getBoundsPosition()[0].y + 80;
+        Bx = maps[number]->getBoundsPosition()[3].x - 80;
+        By = maps[number]->getBoundsPosition()[3].y - 80;
+
     link:
-        playerPosition = Vector2f(maps[number]->getBoundsPosition()[0].x + rand() % ((WIDTH) / 2 - 100) + 100,
-            maps[number]->getBoundsPosition()[0].y + rand() % ((HEIGHT) / 2) + 100 - 100);
+        playerPosition = Vector2f(rand() %(Bx-Ax+1)+Ax, rand() %(By-Ay+1)+Ay);
         player->getSprite().setPosition(playerPosition);
-        for (int i = 0; i < MAPS_COUNT; i++)
+        for (int j = 0; j < maps[number]->getBonuses().size(); j++)
         {
-            for (int j = 0; j < maps[i]->getBonuses().size(); j++)
+            if (maps[number]->getBonuses()[j]->getSprite()
+                                             .getGlobalBounds()
+                                             .intersects(player->getSprite().getGlobalBounds()))
             {
-                if (maps[i]->getBonuses()[j]->getSprite()
-                    .getGlobalBounds()
-                    .intersects(player->getSprite().getGlobalBounds()))
-                {
-                    goto link;
-                }
+                goto link;
             }
         }
-        for (int i = 0; i < MAPS_COUNT; i++)
+        for (int j = 0; j < maps[number]->getObstacles().size(); j++)
         {
-            for (int j = 0; j < maps[i]->getObstacles().size(); j++)
+            if (maps[number]->getObstacles()[j]->getSprite()
+                                               .getGlobalBounds()
+                                               .intersects(player->getSprite().getGlobalBounds()))
             {
-                if (maps[i]->getObstacles()[j]->getSprite()
-                    .getGlobalBounds()
-                    .intersects(player->getSprite().getGlobalBounds()))
-                {
-                    goto link;
-                }
+                goto link;
             }
         }
     }
@@ -158,8 +159,8 @@ public:
     }
 
     void setPlayer()
-        //Добавляем для вашего персонажа аналогичное условие с его именем (name задается в карте Map,
-        //устанавливаем его в конструкторе вашей карты)
+    //Добавляем для вашего персонажа аналогичное условие с его именем (name задается в карте Map,
+    //устанавливаем его в конструкторе вашей карты)
     {
         if (setPlayerFlag)
         {
@@ -207,7 +208,8 @@ public:
             }
         }
         else
-        { //ОТ МЕРЦАНИЯ НА ГРАНИЦАХ, раз в пол секунды игроку разрешается измениться
+        {
+            //ОТ МЕРЦАНИЯ НА ГРАНИЦАХ, раз в пол секунды игроку разрешается измениться
             if (clock() - setPlayerTimer > 500)
             {
                 setPlayerTimer = clock();
@@ -215,33 +217,34 @@ public:
             }
         }
     }
-    
+
     time_t timer;
+
     void go()
     {
-        RenderWindow window(VideoMode(WIDTH, HEIGHT), "Game");
+        RenderWindow window(VideoMode(WIDTH, HEIGHT), "Game",Style::Fullscreen);
         window.setFramerateLimit(60);
         player = new PlayerPacMan;
         setUpPlayerPosition();
         game = true;
-        timer = clock();//Второй поток с логикой игры
+        timer = clock(); //Второй поток с логикой игры
         thread logicThread([&]()
+        {
+            while (game)
             {
-                while (game)
+                if (clock() - timer > 9)
                 {
-                    if (clock() - timer > 9)
-                    {
-                        timer = clock();
-                        setPlayer();
-                        player->move();
-                        player->checkBounds();
-                        player->checkBounds(game);
-                        checkBonuses();
-                        checkObstacles();
-                        playerPosition = player->getSprite().getPosition();
-                    }
+                    timer = clock();
+                    setPlayer();
+                    player->move();
+                    player->checkBounds();
+                    player->checkBounds(game);
+                    checkBonuses();
+                    checkObstacles();
+                    playerPosition = player->getSprite().getPosition();
                 }
-            });
+            }
+        });
 
         logicThread.detach();
         while (window.isOpen() && game)
@@ -265,12 +268,12 @@ public:
             for (int i = 0; i < MAPS_COUNT; i++)
             {
                 maps[i]->draw(window);
-            } 
+            }
             for (int i = 0; i < MAPS_COUNT; i++)
                 window.draw(DrawWeb());
-            
+
             player->draw(window);
-            
+
             for (int i = 0; i < MAPS_COUNT; i++)
             {
                 for (int j = 0; j < maps[i]->getObstacles().size(); j++)
@@ -287,8 +290,7 @@ public:
                 }
             }
 
-           
-            
+
             window.display();
         }
     }
