@@ -2,8 +2,12 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/System/Time.hpp>
+#include <thread>
+#include <time.h>
 #include <vector>
 #include <iostream>
+#include <string>
+#include "chrono"
 
 enum Direction //НАПРАВЛЕНИЯ ДВИЖЕНИЯ
 {

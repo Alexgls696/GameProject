@@ -74,7 +74,6 @@ public:
                 {
                     if (bonuses[i]->getSprite().getGlobalBounds().intersects(bonuses[j]->getSprite().getGlobalBounds()))
                     {
-                        cout << i << " " << endl;
                         goto link;
                     }
                 }
