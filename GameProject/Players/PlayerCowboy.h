@@ -9,11 +9,13 @@ private:
     float speed = 0.1;
     bool flag_UP = false, flag_DOWN = false, flag_LEFT = false, flag_RIGHT = false;
     time_t fireTimer;
+    time_t fireEnemy;
     enum Direction lastDirection;
 public:
     PlayerCowboy()
     {
         fireTimer = std::clock();
+        fireEnemy = std::clock();
         direction=STOP;
         texture.loadFromFile("Textures/cowboy.png");
         sprite.setTexture(texture);
@@ -21,7 +23,7 @@ public:
         //sprite.setScale(1.5f, 1.5f);
         sprite.setOrigin(sprite.getPosition().x + sprite.getTextureRect().width / 2, sprite.getPosition().y+sprite.getTextureRect().height/2);
     }
-
+    
     void move() override
     {
         if(obstacle && !flag_UP && !flag_DOWN && !flag_LEFT && !flag_RIGHT)
@@ -41,6 +43,13 @@ public:
         if(direction!=STOP)
         {
             lastDirection=direction;
+            flag_enemy_animation = true;
+        }
+
+        if (std::clock()-fireEnemy > 2000)
+        {
+            flag_enemy_fire = true;
+            fireEnemy = std::clock();
         }
 
         time = clock.getElapsedTime().asMicroseconds();
@@ -125,7 +134,7 @@ public:
                 flag_bullet_animation=false;
             }
             sprite.setTextureRect(IntRect(100 * int(CurrentFrame) + 10, 440, 60, 80));
-        } 
+        }
     }
 
     void draw(RenderWindow& window)

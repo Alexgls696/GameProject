@@ -25,6 +25,7 @@ private:
     
     int mapIndex = -1; //Проверка контакта с препятствием только на одной карте
     int obstacleIndex = -1; //Проверки контакта с последним препятствием
+    int enemyIndex = -1;
     int MaxCountBonuses = 0; //Число бонусов для победы
     int totalCountBonuses = 0; //текущее число бонусов
 
@@ -188,6 +189,41 @@ public:
         }
     }
 
+    void checkEnemies()
+    {
+        for (int i = 0; i < MAPS_COUNT; i++)
+        {
+            for (int j = 0; j < maps[i]->getEnemies().size(); j++)
+            {
+                if (mapIndex == -1)
+                {
+                    if (maps[i]->getEnemies()[j]->getSprite()
+                        .getGlobalBounds()
+                        .intersects(player->getSprite().getGlobalBounds()))
+                    {
+                        player->setFlag(true);
+                        mapIndex = i;
+                        enemyIndex = j;
+                    }
+                }
+                else
+                {
+                    if (i == mapIndex && enemyIndex == j)
+                    {
+                        if (!maps[mapIndex]->getEnemies()[j]->getSprite()
+                            .getGlobalBounds()
+                            .intersects(player->getSprite().getGlobalBounds()))
+                        {
+                            player->setFlag(false);
+                            mapIndex = -1;
+                            enemyIndex = -1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     void setUpPlayerPosition()
     {
         int number = rand() % MAPS_COUNT;
@@ -214,6 +250,15 @@ public:
             if (maps[number]->getObstacles()[j]->getSprite()
                                                .getGlobalBounds()
                                                .intersects(player->getSprite().getGlobalBounds()))
+            {
+                goto link;
+            }
+        }
+        for (int j = 0; j < maps[number]->getEnemies().size(); j++)
+        {
+            if (maps[number]->getEnemies()[j]->getSprite()
+                .getGlobalBounds()
+                .intersects(player->getSprite().getGlobalBounds()))
             {
                 goto link;
             }
@@ -315,6 +360,7 @@ public:
                 player->checkBounds(game); //границы для пакмана
                 checkBonuses();
                 checkObstacles();
+                checkEnemies();
                 playerPosition = player->getSprite().getPosition();
                 checkTotalBonuses(); // условие победы
                 this_thread::sleep_for(chrono::milliseconds(9));
@@ -377,8 +423,15 @@ public:
                     maps[i]->getBonuses()[j]->draw(window);
                 }
             }
-            window.draw(timerText);
 
+            for (int i = 0; i < MAPS_COUNT; i++)
+            {
+                for (int j = 0; j < maps[i]->getEnemies().size(); j++)
+                {
+                    maps[i]->getEnemies()[j]->draw(window);
+                }
+            }
+            window.draw(timerText);
 
             window.display();
         }

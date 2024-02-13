@@ -3,6 +3,7 @@
 #include "../Obstacles/Obstacles.h"
 #include "Bonuses/Bonuses.h"
 #include "Bonuses/PacManBonus.h"
+#include "../Obstacles/RedDead_Obstacles.h"
 
 #define ONE sf::Vector2f(0,0)
 #define TWO sf::Vector2f(WIDTH/2,0)
@@ -33,9 +34,11 @@ protected:
     string name;
     vector<Bonuses*>bonuses;
     vector<Obstacles*>obstacles;
+    vector<Enemy*>enemies;
     Players*player=nullptr;
     int countBonuses = 0;
     int countObstacles = 0;
+    int countEnemies = 0;
 public:
     bool active = false;
     
@@ -110,6 +113,10 @@ public:
     vector<Obstacles*>getObstacles()
     {
         return obstacles;
+    }
+    vector<Enemy*>getEnemies()
+    {
+        return enemies;
     }
 
     virtual bool is_not_overlap(Object obj, int count) {

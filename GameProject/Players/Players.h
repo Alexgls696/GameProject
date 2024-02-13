@@ -18,6 +18,8 @@ protected:
     bool obstacle = false;
     bool flag_bullet=false;
     bool flag_bullet_animation=false;
+    bool flag_enemy_animation = false;
+    bool flag_enemy_fire = false;
     float CurrentFrame = 0;
 public:
     virtual void setFlag(bool flag)
@@ -63,5 +65,21 @@ public:
     float getFrame()
     {
         return CurrentFrame;
+    }
+    bool& getFlagEnemyAnimation()
+    {
+        return flag_enemy_animation;
+    }
+    void setFlagEnemyAnimation(bool flag_enemy_animation)
+    {
+        this->flag_enemy_animation = flag_enemy_animation;
+    }
+    bool& getFlagEnemyFire()
+    {
+        return flag_enemy_fire;
+    }
+    void setFlagEnemyFire(bool flag_enemy_fire)
+    {
+        this->flag_enemy_fire = flag_enemy_fire;
     }
 };
