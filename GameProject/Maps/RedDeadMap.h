@@ -1,7 +1,4 @@
-﻿
-
-
-#pragma once
+﻿#pragma once
 #include "../Library.h"
 #include "../Players//PlayerCowboy.h"
 #include "../Maps/Map.h"
@@ -322,7 +319,6 @@ public:
             }
             for (int i = 0; i < countEnemies; i++)
             {
-                cout<<EnemyFrame[i]<<endl;
                 if (EnemyFrame[i] > 4 && EnemyFrame[i] < 5 && !fireEnemy[i])
                 {
                     shootSound.play();
@@ -352,7 +348,6 @@ public:
                     }
                 }
             }
-            cout<<endl;
             for (int i = 0; i < countEnemies; i++)
             {
                 if (fireEnemy[i] && rect.getGlobalBounds().intersects(bulletEnemySprite[i].getGlobalBounds()))

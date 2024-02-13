@@ -59,13 +59,14 @@ public:
             {
                 if (i != j)
                 {
-                    if (abs(obstacles[i]->getSprite().getPosition().y-(obstacles[j]->getSprite().getPosition().y))<100)
+                    if (abs(obstacles[i]->getSprite().getPosition().y-(obstacles[j]->getSprite().getPosition().y))<80)
                     {
                         goto link1;
                     }
                 }
             }
         }
+        
         for (int i = 0; i < countBonuses; i++)
         {
             link:
