@@ -76,10 +76,13 @@ public:
             } while (true);
             bonuses.push_back(new InvisibilityBonus);
             bonuses[i]->getSprite().setPosition(rect.getPosition().x + x + 16, rect.getPosition().y + y + 16);
+            bonuses[i]->getSprite().setScale(1.35, 1.35);
             sprites_bonus[i].setTexture(bonus);
             sprites_bonus[i].setPosition(rect.getPosition().x + x, rect.getPosition().y + y);
             objects_bonus[i].SetPosition(rect.getPosition().x + x, rect.getPosition().y + y, rect.getPosition().x + x + 32, rect.getPosition().y + y + 32);
         }
+        bonusSoundBuffer.loadFromFile("Sound/InvisBonusSound.mp3");
+        bonusSound.setBuffer(bonusSoundBuffer);
         file.close();
     }
 
@@ -157,7 +160,7 @@ public:
     }
     void getBonusSoundPlay() override
     {
-        
+        bonusSound.play();
     }
 };
 

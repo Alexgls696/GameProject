@@ -111,7 +111,8 @@ public:
             if (seconds > 0)
             {
                 seconds--;
-                timerText.setString(to_string(minutes) + ":" + to_string(seconds));
+                string sec = (seconds < 10) ? "0" + to_string(seconds) : to_string(seconds);
+                timerText.setString(to_string(minutes) + ":" + sec);
             }
             else
             {
