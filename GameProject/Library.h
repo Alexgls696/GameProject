@@ -8,6 +8,9 @@
 #include <iostream>
 #include <string>
 #include "chrono"
+#include "Sound/GameSound.h"
+
+using namespace sf;
 
 enum Direction //НАПРАВЛЕНИЯ ДВИЖЕНИЯ
 {
@@ -20,6 +23,5 @@ enum Direction //НАПРАВЛЕНИЯ ДВИЖЕНИЯ
 
 using namespace std;
 using namespace sf;
-
 
 

@@ -35,13 +35,24 @@ private:
     int seconds = 31;  //+1 сек
     Color timeColor = Color::Cyan;
     time_t timeTimer;
+    time_t soundTimer;
+    time_t timer;
+    int indexLastMap = -1;
+    bool flagPacManMusic = false;
+    bool flagCowboyMusic = false;
+    string currentMapName;
+    
+    GameSound sound; //Класс в каталоге Sound. Поставьте нужную вам музыку. Если нужно вызвать звук здесь,
+    //то добавляем в класс звук и тут воспроизводим.
+    //Если нужно на вашей карте или при какои то действии вашего персонажа, то добавляем в свой класс звуки отдельно.
 
 public:
     Game() //Добавление карт, не трогаем
     {
+        soundTimer = clock();
         srand(time(0));
         maps = new Map*[MAPS_COUNT];
-        maps[0] = new PacManMap();
+        maps[0] = new PacManMap;
         maps[1] = new RedDeadMap;
         maps[2] = new MapC;
         maps[3] = new InvisibilityMap;
@@ -276,69 +287,58 @@ public:
             maps[i]->active = false;
         }
     }
-
-    void setPlayer()
-    //Добавляем для вашего персонажа аналогичное условие с его именем (name задается в карте Map,
-    //устанавливаем его в конструкторе вашей карты)
+    
+    void setPlayer() //Теперь универсально
     {
-        if (setPlayerFlag)
+        if(setPlayerFlag)
         {
+            if(clock()-setPlayerTimer>250)
+            {
+                setPlayerFlag=false;
+                setPlayerTimer = clock();
+            }
+        }else{
             for (int i = 0; i < MAPS_COUNT; i++)
             {
-                if (maps[i]->getRect().getGlobalBounds().contains(player->getCenter()))
+                if (maps[i]->getRect().getGlobalBounds().contains(player->getSprite().getPosition()))
                 {
-                    if (maps[i]->get_name()._Equal("PacManMap") && maps[i]->active == false)
+                    if(indexLastMap!=i&&maps[i]->active==false)
                     {
                         setPassive(i);
                         maps[i]->active = true;
-                        setPlayerFlag = false;
+                        checkSound(maps[i]->get_name());
+                        setPlayerFlag=true;
                         player = maps[i]->getPlayer();
                         player->getSprite().setPosition(playerPosition);
-                        continue;
+                        indexLastMap = i;
                     }
-                    if (maps[i]->get_name()._Equal("C") && maps[i]->active == false)
-                    {
-                        setPassive(i);
-                        maps[i]->active = true;
-                        setPlayerFlag = false;
-                        player = maps[i]->getPlayer();
-                        player->getSprite().setPosition(playerPosition);
-                        continue;
-                    }
-                    if (maps[i]->get_name()._Equal("RedDeadMap") && maps[i]->active == false)
-                    {
-                        setPassive(i);
-                        maps[i]->active = true;
-                        setPlayerFlag = false;
-                        player = maps[i]->getPlayer();
-                        player->getSprite().setPosition(playerPosition);
-                        continue;
-                    }
-                    if (maps[i]->get_name()._Equal("InvisibilityMap") && maps[i]->active == false)
-                    {
-                        setPassive(i);
-                        maps[i]->active = true;
-                        setPlayerFlag = false;
-                        player = maps[i]->getPlayer();
-                        player->getSprite().setPosition(playerPosition);
-                        continue;
-                    }
-                };
-            }
-        }
-        else
-        {
-            //ОТ МЕРЦАНИЯ НА ГРАНИЦАХ, раз в пол секунды игроку разрешается измениться
-            if (clock() - setPlayerTimer > 500)
-            {
-                setPlayerTimer = clock();
-                setPlayerFlag = true;
+                }
             }
         }
     }
 
-    time_t timer;
-
+    void checkSound(string name)
+    {
+        if(name._Equal("RedDeadMap"))
+        {
+            sound.invSound.stop();
+            sound.pacManSound.stop();
+            sound.cowboySound.play();
+        }
+        if(name._Equal("PacManMap"))
+        {
+            sound.cowboySound.stop();
+            sound.invSound.stop();
+            sound.pacManSound.play();
+        }
+        if(name._Equal("InvisibilityMap"))
+        {
+            sound.cowboySound.stop();
+            sound.pacManSound.stop();
+            sound.invSound.play();
+        }
+    }
+    
     void go()
     {
         RenderWindow window(VideoMode(WIDTH, HEIGHT), "Game");
@@ -356,11 +356,9 @@ public:
                 timer = clock();
                 setPlayer();
                 player->move();
-                player->checkBounds(); //общие границы
                 player->checkBounds(game); //границы для пакмана
                 checkBonuses();
                 checkObstacles();
-                checkEnemies();
                 playerPosition = player->getSprite().getPosition();
                 checkTotalBonuses(); // условие победы
                 this_thread::sleep_for(chrono::milliseconds(9));
@@ -432,7 +430,6 @@ public:
                 }
             }
             window.draw(timerText);
-
             window.display();
         }
     }

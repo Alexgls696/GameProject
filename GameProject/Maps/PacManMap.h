@@ -10,7 +10,6 @@ class PacManMap : public Map
 public:
     PacManMap()
     {
-        player = new PlayerPacMan;
         countBonuses = rand() % (10 - 4 + 1) + 4;
         countObstacles = rand() % (10 - 6 + 1) + 6;;
         for (int i = 0; i < countObstacles; i++)
@@ -94,7 +93,7 @@ public:
 
     Players* getPlayer() override
     {
-        player = new PlayerPacMan;
+        player = new PlayerPacMan();
         return player;
     }
 };

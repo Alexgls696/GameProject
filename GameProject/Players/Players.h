@@ -3,8 +3,6 @@
 using namespace std;
 using namespace sf;
 
-
-
 class Players
 {
 protected:
@@ -30,6 +28,7 @@ public:
     virtual void draw(RenderWindow& window) = 0; //Рисуем вашего персонажа так, как нужно
     virtual void move() = 0; //Движение с помощью объекта direction - класс PlayerPacMan как пример
     virtual void Direction(Event&event) = 0; //Направление движения, пример тоже в классе PlayerPacMan
+    
     virtual Vector2f getCenter()
     {
         return Vector2f(sprite.getPosition().x + sprite.getTextureRect().width / 2, sprite.getPosition().y+sprite.getTextureRect().height/2);
@@ -38,14 +37,10 @@ public:
     {
         return sprite;
     }
-    virtual void checkBounds() //переопределите в наследнике
-    {
-       
-    }
-
+    
     virtual void checkBounds(bool&game)
     {
-        
+        return;
     }
 
     bool&getBullet()
@@ -82,4 +77,9 @@ public:
     {
         this->flag_enemy_fire = flag_enemy_fire;
     }
+    void clear()
+    {
+        
+    }
+    
 };

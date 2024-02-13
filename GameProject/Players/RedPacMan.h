@@ -9,7 +9,7 @@ using namespace std;
 class PlayerRedPacMan : public Players
 {
 public:
-    PlayerRedPacMan():Players()
+    PlayerRedPacMan()
     {
         image.loadFromFile("Textures/red1.png");
         image.createMaskFromColor(Color::White);
