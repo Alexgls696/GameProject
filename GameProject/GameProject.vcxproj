@@ -105,7 +105,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>GameProject\SFML-2.6.0\include</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,22 +141,25 @@
     <ClInclude Include="Bonuses\Bonuses.h" />
     <ClInclude Include="Bonuses\InvisibilityBonus.h" />
     <ClInclude Include="Bonuses\PacManBonus.h" />
+    <ClInclude Include="Bonuses\rabbitBonuses.h" />
     <ClInclude Include="Bonuses\RedDeadBonus.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Library.h" />
+    <ClInclude Include="Maps\rabbitMap.h" />
     <ClInclude Include="Maps\PacManMap.h" />
     <ClInclude Include="Maps\Map.h" />
     <ClInclude Include="Maps\RedDeadMap.h" />
-    <ClInclude Include="Maps\MapC.h" />
     <ClInclude Include="Maps\InvisibilityMap.h" />
     <ClInclude Include="Obstacles\InvisibilityObstacles.h" />
     <ClInclude Include="Obstacles\Obstacles.h" />
     <ClInclude Include="Obstacles\PacManObstacles.h" />
+    <ClInclude Include="Obstacles\rabbitObstacles.h" />
     <ClInclude Include="Obstacles\RedDead_Obstacles.h" />
     <ClInclude Include="Players\PlayerCowboy.h" />
     <ClInclude Include="Players\PlayerInvisibility.h" />
     <ClInclude Include="Players\PlayerPacMan.h" />
     <ClInclude Include="Players\Players.h" />
+    <ClInclude Include="Players\rabbitPlayer.h" />
     <ClInclude Include="Players\RedPacMan.h" />
     <ClInclude Include="Sound\GameSound.h" />
   </ItemGroup>

@@ -2,13 +2,44 @@
 #include "Library.h"
 #include "Maps/PacManMap.h"
 #include "Maps/RedDeadMap.h"
-#include "Maps/MapC.h"
+#include "Players/rabbitPlayer.h"
 #include "Maps/InvisibilityMap.h"
+#include "Maps/rabbitMap.h"
 #include "Players//RedPacMan.h"
 #include "Players/PlayerCowboy.h"
 #include "Players/PlayerInvisibility.h"
 
 //Изменения в Visual Studio
+
+class Menu
+{
+public:
+    Texture fonFail;
+    Texture fonWin;
+    RectangleShape winRect;
+    RectangleShape looseRect;
+    RectangleShape buttonRestart;
+    RectangleShape buttonExit;
+    Menu()
+    {
+        fonFail.loadFromFile("Textures/failed.png");
+        looseRect.setTexture(&fonFail);
+        looseRect.setPosition(0,0);
+        looseRect.setSize(Vector2f(1920,1080));
+        buttonExit.setFillColor(Color::Red);
+        buttonRestart.setFillColor(Color::Green);
+        buttonExit.setSize(Vector2f(250,150));
+        buttonRestart.setSize(Vector2f(250,150));
+        buttonExit.setPosition(WIDTH/2-350,HEIGHT/2+200);
+        buttonRestart.setPosition(WIDTH/2+150,HEIGHT/2+200);
+
+        fonWin.loadFromFile("Textures/win.png");
+        winRect.setTexture(&fonWin);
+        winRect.setPosition(0,0);
+        winRect.setSize(Vector2f(1920,1080));
+    }
+};
+
 class Game
 {
 private:
@@ -29,11 +60,16 @@ private:
     int enemyIndex;
     int MaxCountBonuses; //Число бонусов для победы
     int totalCountBonuses; //текущее число бонусов
-
+    int mouseX;
+    int mouseY;
     Font timerFont;
     Text timerText;
+    Text scoreText;
+    Text secondsText;
     int minutes;
-    int seconds;  
+    int seconds;
+    
+    int secondsPlus;
     Color timeColor = Color::Cyan;
     time_t timeTimer;
     time_t soundTimer;
@@ -42,11 +78,11 @@ private:
     bool flagPacManMusic;
     bool flagCowboyMusic;
     string currentMapName;
-    
+    Menu menu;
     GameSound sound; //Класс в каталоге Sound. Поставьте нужную вам музыку. Если нужно вызвать звук здесь,
     //то добавляем в класс звук и тут воспроизводим.
     //Если нужно на вашей карте или при какои то действии вашего персонажа, то добавляем в свой класс звуки отдельно.
-
+    
 public:
     void start()
     {
@@ -61,7 +97,7 @@ public:
         maps = new Map*[MAPS_COUNT];
         maps[0] = new PacManMap;
         maps[1] = new RedDeadMap;
-        maps[2] = new MapC;
+        maps[2] = new RabbitMap;
         maps[3] = new InvisibilityMap;
         score = 0;
         setPlayerFlag = clock();
@@ -74,7 +110,6 @@ public:
         timerText.setOutlineColor(Color::Black);
         timeTimer = clock();
         timerText.setString(to_string(minutes) + ":" + to_string(seconds));
-
         minutes=1;
         seconds = 31; //+1 от времени.
         flagPacManMusic = false;
@@ -86,10 +121,21 @@ public:
         totalCountBonuses = 0;
         indexLastMap = -1;
         score = 0;
+        secondsPlus=0;
         game = true;
         gameMode = true;
         win = false;
         loose = false;
+        scoreText.setPosition(WIDTH/2-150,HEIGHT/2-220);
+        scoreText.setFillColor(Color::White);
+        scoreText.setFont(timerFont);
+        scoreText.setCharacterSize(64);
+        
+        secondsText.setPosition(WIDTH/2-150,HEIGHT/2+18);
+        secondsText.setFillColor(Color::White);
+        secondsText.setFont(timerFont);
+        secondsText.setCharacterSize(64);
+        
     }
 
     ~Game()
@@ -105,8 +151,9 @@ public:
         {
             if (minutes == 0 && seconds == 0) //Окончание игры
             {
+                scoreText.setString(to_string(score));
                 loose = true;
-                game = false;
+                gameMode = false;
             }
             if (seconds > 0)
             {
@@ -131,6 +178,7 @@ public:
                     colorFlag=true; 
                 }
             }
+            secondsPlus++;
             this_thread::sleep_for(chrono::milliseconds(1000));
         }
     }
@@ -181,8 +229,8 @@ public:
         if (totalCountBonuses == MaxCountBonuses)
         {
             win = true;
+            gameMode=false;
             cout << "Game win!" << endl;
-            //game = false; 
         }
     }
 
@@ -205,7 +253,9 @@ public:
                         {
                             sound.pacManbreakSound.play();
                             sound.pacManSound.stop();
-                            gameMode = false;
+                            loose=true;
+                            gameMode=false;
+                            scoreText.setString(to_string(score));
                         }
                     }
                 }
@@ -365,12 +415,19 @@ public:
             sound.invSound.play();
         }
     }
-    
+
+    void restart()
+    {
+        gameMode=false;
+        this_thread::sleep_for(chrono::milliseconds(1001));
+        Players::direction=STOP;
+        delete []maps;
+        delete player;
+    }
     void go()
     {
         RenderWindow window(VideoMode(WIDTH, HEIGHT), "Game");
         window.setFramerateLimit(60);
-        
         link:
         start();
         player = new PlayerPacMan;
@@ -386,6 +443,8 @@ public:
                 if(player->checkBounds())
                 {
                     sound.pacManbreakSound.play();
+                    loose=true;
+                    scoreText.setString(to_string(score));
                     gameMode=false;
                     sound.pacManSound.stop();
                 }; //границы для пакмана
@@ -408,13 +467,12 @@ public:
 
         timerThread.detach();
         logicThread.detach();
-
+        Event event;
         while (window.isOpen())
         {
             window.clear(Color(255, 255, 255));
             if(gameMode)
             {
-                Event event;
                 while (window.pollEvent(event))
                 {
                     player->Direction(event);
@@ -430,11 +488,7 @@ public:
                     }
                     if (Keyboard::isKeyPressed(Keyboard::R))
                     {
-                        gameMode=false;
-                        this_thread::sleep_for(chrono::milliseconds(1001));
-                        Players::direction=STOP;
-                        delete []maps;
-                        delete player;
+                        restart();
                         goto link;
                     }
 
@@ -472,12 +526,13 @@ public:
                     }
                 }
                 window.draw(timerText);
-            }else //Место для меню и остального
+            }
+            if(loose)
             {
-                Event event;
                 while (window.pollEvent(event))
                 {
-                    player->Direction(event);
+                    mouseX=Mouse::getPosition().x;
+                    mouseY=Mouse::getPosition().y;
                     if (event.type == Event::Closed)
                     {
                         window.close();
@@ -486,9 +541,57 @@ public:
                     {
                         window.close();
                     }
+                    if(Mouse::isButtonPressed(Mouse::Left)&&menu.buttonExit.getGlobalBounds().contains(mouseX,mouseY))
+                    {
+                        window.close();
+                    }
+                    if(Mouse::isButtonPressed(Mouse::Left)&&menu.buttonRestart.getGlobalBounds().contains(mouseX,mouseY))
+                    {
+                        restart();
+                        goto link;
+                    }
                 }
+                scoreText.setString(to_string(score));
+                secondsText.setString(to_string(secondsPlus)+" cek.");
+                window.draw(menu.looseRect);
+                window.draw(menu.buttonExit);
+                window.draw(menu.buttonRestart);
+                window.draw(scoreText);
+                window.draw(secondsText);
             }
-
+            if(win)
+            {
+                while (window.pollEvent(event))
+                {
+                    mouseX=Mouse::getPosition().x;
+                    mouseY=Mouse::getPosition().y;
+                    if (event.type == Event::Closed)
+                    {
+                        window.close();
+                    }
+                    if (Keyboard::isKeyPressed(Keyboard::Escape))
+                    {
+                        window.close();
+                    }
+                    if(Mouse::isButtonPressed(Mouse::Left)&&menu.buttonExit.getGlobalBounds().contains(mouseX,mouseY))
+                    {
+                        window.close();
+                    }
+                    if(Mouse::isButtonPressed(Mouse::Left)&&menu.buttonRestart.getGlobalBounds().contains(mouseX,mouseY))
+                    {
+                        restart();
+                        goto link;
+                    }
+                }
+                    scoreText.setString(to_string(score));
+                    secondsText.setString(to_string(secondsPlus)+" cek.");
+                    window.draw(menu.winRect);
+                    window.draw(menu.buttonExit);
+                    window.draw(menu.buttonRestart);
+                    window.draw(scoreText);
+                    window.draw(secondsText);
+                }
+            
             window.display();
         }
     }

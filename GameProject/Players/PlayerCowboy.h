@@ -174,7 +174,6 @@ public:
         {
             direction = STOP;
         }
-        
     }
 
     enum Direction getDirection() override

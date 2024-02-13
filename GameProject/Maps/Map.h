@@ -27,7 +27,6 @@ struct Object {
 class Map //abstract class
 {
 protected:
-    sf::RectangleShape rect;
     static int index;
     sf::Texture texture;
     string name;
@@ -39,9 +38,12 @@ protected:
     int countObstacles = 0;
     int countEnemies = 0;
     SoundBuffer bonusSoundBuffer; //в конструкторе своем инициализируем
+    sf::RectangleShape rect;
     Sound bonusSound;
 public:
+   
     static std::vector<int>positions;
+    
     bool active = false;
     //index 0 - левый верхний угол
     //index 1 - левый нижний угол
