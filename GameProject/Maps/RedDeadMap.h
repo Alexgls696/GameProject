@@ -334,4 +334,9 @@ public:
         player = new PlayerCowboy;
         return player;
     }
+    
+    void getBonusSoundPlay() override
+    {
+        
+    }
 };

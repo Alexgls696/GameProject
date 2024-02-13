@@ -78,9 +78,10 @@ public:
                 }
             }
         }
-
-
+        
         name = "PacManMap";
+        bonusSoundBuffer.loadFromFile("Sound/PacManEat.mp3");
+        bonusSound.setBuffer(bonusSoundBuffer);
         rect.setFillColor(Color::White);
         texture.loadFromFile("Textures//PacManMap.jpg");
         rect.setTexture(&texture);
@@ -95,5 +96,9 @@ public:
     {
         player = new PlayerPacMan();
         return player;
+    }
+    void getBonusSoundPlay() override
+    {
+        bonusSound.play();
     }
 };

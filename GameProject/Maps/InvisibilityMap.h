@@ -155,5 +155,9 @@ public:
         player = new PlayerInvisibility(this);
         return player;
     }
+    void getBonusSoundPlay() override
+    {
+        
+    }
 };
 

@@ -12,34 +12,36 @@
 class Game
 {
 private:
-    Map** maps = nullptr;
-    Players* player = nullptr;
+    int timerScale = 1;
+    Map** maps;
+    Players* player;
     Vector2f playerPosition; //перемещение между картами
-    int score = 0;
+    int score;
     time_t setPlayerTimer; 
-    bool setPlayerFlag; //Против мерцания на границах карт
+    bool setPlayerFlag; //Для перехода ограничение времени
     
-    bool game = true;
-    bool win = false;
-    bool loose = false;
+    bool game;
+    bool gameMode;
+    bool win ;
+    bool loose ;
     
-    int mapIndex = -1; //Проверка контакта с препятствием только на одной карте
-    int obstacleIndex = -1; //Проверки контакта с последним препятствием
-    int enemyIndex = -1;
-    int MaxCountBonuses = 0; //Число бонусов для победы
-    int totalCountBonuses = 0; //текущее число бонусов
+    int mapIndex; //Проверка контакта с препятствием только на одной карте
+    int obstacleIndex; //Проверки контакта с последним препятствием
+    int enemyIndex;
+    int MaxCountBonuses; //Число бонусов для победы
+    int totalCountBonuses; //текущее число бонусов
 
     Font timerFont;
     Text timerText;
-    int minutes = 1;
-    int seconds = 31;  //+1 сек
+    int minutes;
+    int seconds;  
     Color timeColor = Color::Cyan;
     time_t timeTimer;
     time_t soundTimer;
     time_t timer;
-    int indexLastMap = -1;
-    bool flagPacManMusic = false;
-    bool flagCowboyMusic = false;
+    int indexLastMap;
+    bool flagPacManMusic;
+    bool flagCowboyMusic;
     string currentMapName;
     
     GameSound sound; //Класс в каталоге Sound. Поставьте нужную вам музыку. Если нужно вызвать звук здесь,
@@ -47,8 +49,14 @@ private:
     //Если нужно на вашей карте или при какои то действии вашего персонажа, то добавляем в свой класс звуки отдельно.
 
 public:
-    Game() //Добавление карт, не трогаем
+    void start()
     {
+        Map::positions[0]=1;
+        Map::positions[1]=2;
+        Map::positions[2]=3;
+        Map::positions[3]=4;
+        maps = nullptr;
+        player = nullptr;
         soundTimer = clock();
         srand(time(0));
         maps = new Map*[MAPS_COUNT];
@@ -67,6 +75,22 @@ public:
         timerText.setOutlineColor(Color::Black);
         timeTimer = clock();
         timerText.setString(to_string(minutes) + ":" + to_string(seconds));
+
+        minutes=1;
+        seconds = 31; //+1 от времени.
+        flagPacManMusic = false;
+        flagCowboyMusic = false;
+        mapIndex = -1; 
+        obstacleIndex = -1; 
+        enemyIndex = -1;
+        MaxCountBonuses = 0; 
+        totalCountBonuses = 0;
+        indexLastMap = -1;
+        score = 0;
+        game = true;
+        gameMode = true;
+        win = false;
+        loose = false;
     }
 
     ~Game()
@@ -78,7 +102,7 @@ public:
     {
         string str;
         bool colorFlag = true;
-        while (game)
+        while (gameMode)
         {
             if (minutes == 0 && seconds == 0) //Окончание игры
             {
@@ -107,7 +131,7 @@ public:
                     colorFlag=true; 
                 }
             }
-            this_thread::sleep_for(chrono::milliseconds(1000));
+            this_thread::sleep_for(chrono::milliseconds(1000*timerScale));
         }
     }
 
@@ -145,6 +169,7 @@ public:
                 {
                     score += 100;
                     maps[i]->intersectBonuses(j);
+                    maps[i]->getBonusSoundPlay();
                     totalCountBonuses++;
                 }
             }
@@ -178,7 +203,9 @@ public:
                         obstacleIndex = j;
                         if (maps[i]->get_name() == "PacManMap")
                         {
-                            game = false;
+                            sound.pacManbreakSound.play();
+                            sound.pacManSound.stop();
+                            gameMode = false;
                         }
                     }
                 }
@@ -316,7 +343,7 @@ public:
             }
         }
     }
-
+    
     void checkSound(string name)
     {
         if(name._Equal("RedDeadMap"))
@@ -343,20 +370,25 @@ public:
     {
         RenderWindow window(VideoMode(WIDTH, HEIGHT), "Game");
         window.setFramerateLimit(60);
+        
+        link:
+        start();
         player = new PlayerPacMan;
         setUpPlayerPosition(); //Устанавливаем позацию игрока
         calculateCountBonuses(); // считаем общее число бонусов
-        game = true;
-
         //Второй поток с логикой игры
         thread logicThread([&]()
         {
-            while (game)
+            while (gameMode)
             {
-                timer = clock();
                 setPlayer();
                 player->move();
-                player->checkBounds(game); //границы для пакмана
+                if(player->checkBounds())
+                {
+                    sound.pacManbreakSound.play();
+                    gameMode=false;
+                    sound.pacManSound.stop();
+                }; //границы для пакмана
                 checkBonuses();
                 checkObstacles();
                 playerPosition = player->getSprite().getPosition();
@@ -368,68 +400,95 @@ public:
         //ТАЙМЕР
         thread timerThread([&]()
         {
-            if (game)
+            if (gameMode)
             {
                 timerWork();
-            }
+            };
         });
 
         timerThread.detach();
         logicThread.detach();
 
-        while (window.isOpen() && game)
+        while (window.isOpen())
         {
-           
-            
             window.clear(Color(255, 255, 255));
-            Event event;
-            while (window.pollEvent(event))
+            if(gameMode)
             {
-                player->Direction(event);
-                if (event.type == Event::Closed)
+                Event event;
+                while (window.pollEvent(event))
                 {
-                    game = false;
-                    window.close();
-                }
-                if (Keyboard::isKeyPressed(Keyboard::Escape))
-                {
-                    game = false;
-                    window.close();
-                }
-            }
-            for (int i = 0; i < MAPS_COUNT; i++)
-            {
-                maps[i]->draw(window);
-            }
-            for (int i = 0; i < MAPS_COUNT; i++)
-                window.draw(DrawWeb());
+                    player->Direction(event);
+                    if (event.type == Event::Closed)
+                    {
+                        gameMode = false;
+                        window.close();
+                    }
+                    if (Keyboard::isKeyPressed(Keyboard::Escape))
+                    {
+                        gameMode = false;
+                        window.close();
+                    }
+                    if (Keyboard::isKeyPressed(Keyboard::R))
+                    {
+                        gameMode=false;
+                        this_thread::sleep_for(chrono::milliseconds(250));
+                        Players::direction=STOP;
+                        delete []maps;
+                        delete player;
+                        goto link;
+                    }
 
-            player->draw(window);
-
-            for (int i = 0; i < MAPS_COUNT; i++)
-            {
-                for (int j = 0; j < maps[i]->getObstacles().size(); j++)
+                }
+                for (int i = 0; i < MAPS_COUNT; i++)
                 {
-                    maps[i]->getObstacles()[j]->draw(window);
+                    maps[i]->draw(window);
+                }
+                for (int i = 0; i < MAPS_COUNT; i++)
+                    window.draw(DrawWeb());
+
+                player->draw(window);
+
+                for (int i = 0; i < MAPS_COUNT; i++)
+                {
+                    for (int j = 0; j < maps[i]->getObstacles().size(); j++)
+                    {
+                        maps[i]->getObstacles()[j]->draw(window);
+                    }
+                }
+
+                for (int i = 0; i < MAPS_COUNT; i++)
+                {
+                    for (int j = 0; j < maps[i]->getBonuses().size(); j++)
+                    {
+                        maps[i]->getBonuses()[j]->draw(window);
+                    }
+                }
+
+                for (int i = 0; i < MAPS_COUNT; i++)
+                {
+                    for (int j = 0; j < maps[i]->getEnemies().size(); j++)
+                    {
+                        maps[i]->getEnemies()[j]->draw(window);
+                    }
+                }
+                window.draw(timerText);
+            }else //Место для меню и остального
+            {
+                Event event;
+                while (window.pollEvent(event))
+                {
+                    player->Direction(event);
+                    if (event.type == Event::Closed)
+                    {
+                        window.close();
+                    }
+                    if (Keyboard::isKeyPressed(Keyboard::Escape))
+                    {
+                        window.close();
+                    }
                 }
             }
 
-            for (int i = 0; i < MAPS_COUNT; i++)
-            {
-                for (int j = 0; j < maps[i]->getBonuses().size(); j++)
-                {
-                    maps[i]->getBonuses()[j]->draw(window);
-                }
-            }
-
-            for (int i = 0; i < MAPS_COUNT; i++)
-            {
-                for (int j = 0; j < maps[i]->getEnemies().size(); j++)
-                {
-                    maps[i]->getEnemies()[j]->draw(window);
-                }
-            }
-            window.draw(timerText);
             window.display();
         }
     }

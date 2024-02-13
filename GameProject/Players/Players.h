@@ -6,7 +6,6 @@ using namespace sf;
 class Players
 {
 protected:
-    static Direction direction;
     Texture texture;
     Sprite sprite;
     RectangleShape rectangle_shape;
@@ -20,6 +19,7 @@ protected:
     bool flag_enemy_fire = false;
     float CurrentFrame = 0;
 public:
+    static Direction direction;
     virtual void setFlag(bool flag)
     {
         this->obstacle=flag;
@@ -38,9 +38,9 @@ public:
         return sprite;
     }
     
-    virtual void checkBounds(bool&game)
+    virtual bool checkBounds()
     {
-        return;
+        return false;
     }
 
     bool&getBullet()

@@ -19,4 +19,8 @@ public:
         player = new PlayerRedPacMan();
         return  player;
     }
+    void getBonusSoundPlay() override
+    {
+        
+    }
 };

@@ -85,18 +85,19 @@ public:
         }
     }
     
-    void checkBounds(bool& game) override
+    bool checkBounds() override
     {
         if(sprite.getPosition().x-sprite.getTextureRect().width/2 <0 ||sprite.getPosition().x+sprite.getTextureRect().width/2>WIDTH)
         {
-            game=false;
             direction=STOP;
+            return true;
         }
         if(sprite.getPosition().y-sprite.getTextureRect().height/2 <0 ||sprite.getPosition().y+sprite.getTextureRect().height/2>HEIGHT)
         {
-            game=false;
             direction=STOP;
+            return true;
         }
+        return false;
     }
     
     void setFlag(bool flag) override

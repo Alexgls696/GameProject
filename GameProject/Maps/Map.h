@@ -27,7 +27,6 @@ struct Object {
 class Map //abstract class
 {
 protected:
-    static std::vector<int>positions;
     sf::RectangleShape rect;
     static int index;
     sf::Texture texture;
@@ -39,9 +38,11 @@ protected:
     int countBonuses = 0;
     int countObstacles = 0;
     int countEnemies = 0;
+    SoundBuffer bonusSoundBuffer; //в конструкторе своем инициализируем
+    Sound bonusSound;
 public:
+    static std::vector<int>positions;
     bool active = false;
-    
     //index 0 - левый верхний угол
     //index 1 - левый нижний угол
     //index 2 - правый нижний угол
@@ -152,6 +153,8 @@ public:
     void setPlayer(Players* player)
     {
         this->player = player;
-    }    
+    }
+
+    virtual void getBonusSoundPlay() = 0;
 };
 
