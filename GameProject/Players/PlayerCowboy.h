@@ -177,18 +177,6 @@ public:
         
     }
 
-    void checkBounds() override
-    {
-        if (sprite.getPosition().x-sprite.getTextureRect().width/2 <0 ||sprite.getPosition().x+sprite.getTextureRect().width/2>1920)
-        {
-            direction=STOP;
-        }
-        if (sprite.getPosition().y-sprite.getTextureRect().height/2 <0 ||sprite.getPosition().y+sprite.getTextureRect().height/2>1080)
-        {
-            direction=STOP;
-        }
-    }
-
     enum Direction getDirection() override
     {
         return lastDirection;

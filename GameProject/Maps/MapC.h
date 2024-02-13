@@ -16,7 +16,7 @@ public:
     }
     Players*getPlayer() override
     {
-        player = new PlayerRedPacMan;
+        player = new PlayerRedPacMan();
         return  player;
     }
 };

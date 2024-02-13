@@ -158,7 +158,7 @@
     <ClInclude Include="Players\PlayerPacMan.h" />
     <ClInclude Include="Players\Players.h" />
     <ClInclude Include="Players\RedPacMan.h" />
-    <ClInclude Include="Sound\Sound.h" />
+    <ClInclude Include="Sound\GameSound.h" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Textures\" />
