@@ -12,7 +12,6 @@
 class Game
 {
 private:
-    int timerScale = 1;
     Map** maps;
     Players* player;
     Vector2f playerPosition; //перемещение между картами
@@ -131,7 +130,7 @@ public:
                     colorFlag=true; 
                 }
             }
-            this_thread::sleep_for(chrono::milliseconds(1000*timerScale));
+            this_thread::sleep_for(chrono::milliseconds(1000));
         }
     }
 
@@ -431,7 +430,7 @@ public:
                     if (Keyboard::isKeyPressed(Keyboard::R))
                     {
                         gameMode=false;
-                        this_thread::sleep_for(chrono::milliseconds(250));
+                        this_thread::sleep_for(chrono::milliseconds(1001));
                         Players::direction=STOP;
                         delete []maps;
                         delete player;
