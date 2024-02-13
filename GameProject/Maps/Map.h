@@ -154,6 +154,7 @@ public:
     
     void setPlayer(Players* player)
     {
+        delete player;
         this->player = player;
     }
 

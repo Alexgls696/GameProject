@@ -9,13 +9,11 @@ private:
     float speed = 0.1;
     bool flag_UP = false, flag_DOWN = false, flag_LEFT = false, flag_RIGHT = false;
     time_t fireTimer;
-    time_t fireEnemy;
     enum Direction lastDirection;
 public:
     PlayerCowboy()
     {
         fireTimer = std::clock();
-        fireEnemy = std::clock();
         direction=STOP;
         texture.loadFromFile("Textures/cowboy.png");
         sprite.setTexture(texture);
@@ -45,13 +43,8 @@ public:
             lastDirection=direction;
             flag_enemy_animation = true;
         }
-
-        if (std::clock()-fireEnemy > 2000)
-        {
-            flag_enemy_fire = true;
-            fireEnemy = std::clock();
-        }
-
+        
+        
         time = clock.getElapsedTime().asMicroseconds();
         clock.restart();
         time = time / 800;

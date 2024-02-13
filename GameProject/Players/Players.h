@@ -16,9 +16,10 @@ protected:
     bool flag_bullet=false;
     bool flag_bullet_animation=false;
     bool flag_enemy_animation = false;
-    bool flag_enemy_fire = false;
     float CurrentFrame = 0;
+    int health = 3;
 public:
+    bool flag_enemy_fire[3] = {true,true,true};
     static Direction direction;
     virtual void setFlag(bool flag)
     {
@@ -69,17 +70,17 @@ public:
     {
         this->flag_enemy_animation = flag_enemy_animation;
     }
-    bool& getFlagEnemyFire()
+
+
+    
+    int getHealth()
     {
-        return flag_enemy_fire;
+        return health;
     }
-    void setFlagEnemyFire(bool flag_enemy_fire)
+    void setHealth(int health)
     {
-        this->flag_enemy_fire = flag_enemy_fire;
+        this->health = health;
     }
-    void clear()
-    {
-        
-    }
+
     
 };

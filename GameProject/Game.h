@@ -110,8 +110,8 @@ public:
         timerText.setOutlineColor(Color::Black);
         timeTimer = clock();
         timerText.setString(to_string(minutes) + ":" + to_string(seconds));
-        minutes=1;
-        seconds = 31; //+1 от времени.
+        minutes=2;
+        seconds = 1; //+1 от времени.
         flagPacManMusic = false;
         flagCowboyMusic = false;
         mapIndex = -1; 
@@ -362,6 +362,7 @@ public:
                 continue;
             }
             maps[i]->active = false;
+            maps[i]->setPlayer(nullptr);
         }
     }
     
@@ -491,8 +492,8 @@ public:
                         restart();
                         goto link;
                     }
-
                 }
+                
                 for (int i = 0; i < MAPS_COUNT; i++)
                 {
                     maps[i]->draw(window);
@@ -501,7 +502,15 @@ public:
                     window.draw(DrawWeb());
 
                 player->draw(window);
-
+                if(player->getHealth()==0)
+                {
+                    sound.looseSound.play();
+                    gameMode = false;
+                    loose=true;
+                    sound.cowboySound.stop();
+                    sound.pacManSound.stop();
+                    sound.invSound.stop();
+                }
                 for (int i = 0; i < MAPS_COUNT; i++)
                 {
                     for (int j = 0; j < maps[i]->getObstacles().size(); j++)

@@ -22,7 +22,7 @@ public:
         bonusSoundBuffer.loadFromFile("Sound/rabbitEat.mp3");
         bonusSound.setBuffer(bonusSoundBuffer);
         countBonuses = 15;
-        countObstacles = rand()%4;
+        countObstacles = rand()%(4-2+1)+2;
         for(int i = 0; i < countBonuses; i++)
         {
             int type = rand()%3;

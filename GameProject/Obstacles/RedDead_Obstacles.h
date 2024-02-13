@@ -40,7 +40,7 @@ private:
     Sprite sprite;
     Image image;
     Vector2f position;
-    int health = 2;
+    int health = 1;
     int see=0;
 public:
     Enemy()

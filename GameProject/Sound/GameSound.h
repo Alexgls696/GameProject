@@ -12,18 +12,20 @@ public:
     Sound looseSound;
     SoundBuffer pacManbreakBuffer;
     Sound pacManbreakSound;
-    
     GameSound()
     {
+        winSoundBuffer.loadFromFile("Sound/sound_win.mp3");
+        winSound.setBuffer(winSoundBuffer);
+        looseSoundBuffer.loadFromFile("Sound/sound_fail.mp3");
+        looseSound.setBuffer(looseSoundBuffer);
         pacManSound.openFromFile("Sound/pacManStartSound.mp3");
-        pacManSound.setVolume(0);
+        pacManSound.setVolume(75);
         pacManSound.setLoop(true);
         cowboySound.openFromFile("Sound/cowboyStartSound.mp3");
-        cowboySound.setVolume(0);
+        cowboySound.setVolume(75);
         invSound.openFromFile("Sound/invStartSound.mp3");
-        invSound.setVolume(0);
+        invSound.setVolume(75);
         pacManbreakBuffer.loadFromFile("Sound/pacManFail.mp3");
         pacManbreakSound.setBuffer(pacManbreakBuffer);
-        
     }
 };

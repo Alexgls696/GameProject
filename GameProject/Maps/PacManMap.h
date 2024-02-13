@@ -10,7 +10,7 @@ public:
     PacManMap()
     {
         countBonuses = rand() % (10 - 4 + 1) + 4;
-        countObstacles = rand() % (10 - 6 + 1) + 6;;
+        countObstacles = rand() % (8 - 4 + 1) + 4;;
         for (int i = 0; i < countObstacles; i++)
         {
             obstacles.push_back(new PacManObstacles);
