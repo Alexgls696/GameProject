@@ -19,7 +19,7 @@ public:
         looseSoundBuffer.loadFromFile("Sound/sound_fail.mp3");
         looseSound.setBuffer(looseSoundBuffer);
         pacManSound.openFromFile("Sound/pacManStartSound.mp3");
-        pacManSound.setVolume(75);
+        pacManSound.setVolume(35);
         pacManSound.setLoop(true);
         cowboySound.openFromFile("Sound/cowboyStartSound.mp3");
         cowboySound.setVolume(75);
