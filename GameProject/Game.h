@@ -5,9 +5,6 @@
 #include "Players/rabbitPlayer.h"
 #include "Maps/InvisibilityMap.h"
 #include "Maps/rabbitMap.h"
-#include "Players//RedPacMan.h"
-#include "Players/PlayerCowboy.h"
-#include "Players/PlayerInvisibility.h"
 
 //Изменения в Visual Studio
 
@@ -17,6 +14,8 @@ public:
     Texture fonFail;
     Texture fonWin;
     RectangleShape winRect;
+    Texture restartTexturebutton;
+    Texture exitTextureButton;
     RectangleShape looseRect;
     RectangleShape buttonRestart;
     RectangleShape buttonExit;
@@ -26,17 +25,21 @@ public:
         looseRect.setTexture(&fonFail);
         looseRect.setPosition(0,0);
         looseRect.setSize(Vector2f(1920,1080));
-        buttonExit.setFillColor(Color::Red);
-        buttonRestart.setFillColor(Color::Green);
+        buttonExit.setFillColor(Color::White);
+        buttonRestart.setFillColor(Color::White);
+        
         buttonExit.setSize(Vector2f(250,150));
         buttonRestart.setSize(Vector2f(250,150));
         buttonExit.setPosition(WIDTH/2-350,HEIGHT/2+200);
         buttonRestart.setPosition(WIDTH/2+150,HEIGHT/2+200);
-
         fonWin.loadFromFile("Textures/win.png");
+        restartTexturebutton.loadFromFile("Textures/restart.png");
+        exitTextureButton.loadFromFile("Textures/exit.png");
         winRect.setTexture(&fonWin);
         winRect.setPosition(0,0);
         winRect.setSize(Vector2f(1920,1080));
+        buttonRestart.setTexture(&restartTexturebutton);
+        buttonExit.setTexture(&exitTextureButton);
     }
 };
 
@@ -401,6 +404,7 @@ public:
         {
             sound.invSound.stop();
             sound.pacManSound.stop();
+            sound.rabbitSound.stop();
             sound.cowboySound.play();
         }
         if(name._Equal("PacManMap"))
@@ -408,12 +412,21 @@ public:
             sound.cowboySound.stop();
             sound.invSound.stop();
             sound.pacManSound.play();
+            sound.rabbitSound.stop();
         }
         if(name._Equal("InvisibilityMap"))
         {
             sound.cowboySound.stop();
             sound.pacManSound.stop();
+            sound.rabbitSound.stop();
             sound.invSound.play();
+        }
+        if(name._Equal("rabbitMap"))
+        {
+            sound.cowboySound.stop();
+            sound.pacManSound.stop();
+            sound.invSound.stop();
+            sound.rabbitSound.play();
         }
     }
 

@@ -87,7 +87,7 @@ public:
 
         if(flag_bullet_animation==true && lastDirection==LEFT)
         {
-            CurrentFrame += 0.01 * time;
+            CurrentFrame += 0.015 * time;
             if (CurrentFrame > 18)
             {
                 CurrentFrame = 0;
@@ -98,7 +98,7 @@ public:
 
         if(flag_bullet_animation==true && lastDirection==RIGHT)
         {
-            CurrentFrame += 0.01 * time;
+            CurrentFrame += 0.015 * time;
             if (CurrentFrame > 18)
             {
                 CurrentFrame = 0;
@@ -109,7 +109,7 @@ public:
 
         if(flag_bullet_animation==true && lastDirection==DOWN)
         {
-            CurrentFrame += 0.01 * time;
+            CurrentFrame += 0.015 * time;
             if (CurrentFrame > 18)
             {
                 CurrentFrame =0;
@@ -120,7 +120,7 @@ public:
 
         if(flag_bullet_animation==true && lastDirection==UP)
         {
-            CurrentFrame += 0.01 * time;
+            CurrentFrame += 0.015 * time;
             if (CurrentFrame > 18)
             {
                 CurrentFrame =0;

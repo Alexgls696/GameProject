@@ -5,6 +5,7 @@ class GameSound
 public:
     Music pacManSound;
     Music cowboySound;
+    Music rabbitSound;
     Music invSound;
     SoundBuffer winSoundBuffer;
     Sound winSound;
@@ -14,6 +15,7 @@ public:
     Sound pacManbreakSound;
     GameSound()
     {
+        rabbitSound.openFromFile("Sound/rabbitStartSound.mp3");
         winSoundBuffer.loadFromFile("Sound/sound_win.mp3");
         winSound.setBuffer(winSoundBuffer);
         looseSoundBuffer.loadFromFile("Sound/sound_fail.mp3");

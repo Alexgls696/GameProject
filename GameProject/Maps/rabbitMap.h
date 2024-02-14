@@ -1,4 +1,5 @@
-﻿#include <stack>
+﻿
+#include <stack>
 #include <iostream>
 #include <vector>
 #include <ctime>
@@ -19,6 +20,7 @@ private:
 public:
     RabbitMap()
     {
+        name="rabbitMap";
         bonusSoundBuffer.loadFromFile("Sound/rabbitEat.mp3");
         bonusSound.setBuffer(bonusSoundBuffer);
         countBonuses = 15;

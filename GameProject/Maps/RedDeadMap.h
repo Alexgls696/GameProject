@@ -319,32 +319,35 @@ public:
             }
             for (int i = 0; i < countEnemies; i++)
             {
-                if (EnemyFrame[i] > 4 && EnemyFrame[i] < 5 && !fireEnemy[i])
+                if(enemies[i]->getSprite().getPosition().x!=-100)
                 {
-                    shootSound.play();
-                    fireEnemy[i] = true;
-                    switch (enemies[i]->getSee())
+                    if (EnemyFrame[i] > 4 && EnemyFrame[i] < 5 && !fireEnemy[i])
                     {
-                    case 1:
-                        bulletEnemySprite[i].setPosition(enemies[i]->getSprite().getPosition().x - 40,
-                            enemies[i]->getSprite().getPosition().y - 25);
-                        lastSee[i] = enemies[i]->getSee();
-                        break;
-                    case 2:
-                        bulletEnemySprite[i].setPosition(enemies[i]->getSprite().getPosition().x + 30,
-                            enemies[i]->getSprite().getPosition().y - 20);
-                        lastSee[i] = enemies[i]->getSee();
-                        break;
-                    case 3:
-                        bulletEnemySprite[i].setPosition(enemies[i]->getSprite().getPosition().x + 5,
-                            enemies[i]->getSprite().getPosition().y + 60);
-                        lastSee[i] = enemies[i]->getSee();
-                        break;
-                    case 4:
-                        bulletEnemySprite[i].setPosition(enemies[i]->getSprite().getPosition().x + 5,
-                            enemies[i]->getSprite().getPosition().y - 60);
-                        lastSee[i] = enemies[i]->getSee();
-                        break;
+                        shootSound.play();
+                        fireEnemy[i] = true;
+                        switch (enemies[i]->getSee())
+                        {
+                        case 1:
+                            bulletEnemySprite[i].setPosition(enemies[i]->getSprite().getPosition().x - 40,
+                                enemies[i]->getSprite().getPosition().y - 25);
+                            lastSee[i] = enemies[i]->getSee();
+                            break;
+                        case 2:
+                            bulletEnemySprite[i].setPosition(enemies[i]->getSprite().getPosition().x + 30,
+                                enemies[i]->getSprite().getPosition().y - 20);
+                            lastSee[i] = enemies[i]->getSee();
+                            break;
+                        case 3:
+                            bulletEnemySprite[i].setPosition(enemies[i]->getSprite().getPosition().x + 5,
+                                enemies[i]->getSprite().getPosition().y + 60);
+                            lastSee[i] = enemies[i]->getSee();
+                            break;
+                        case 4:
+                            bulletEnemySprite[i].setPosition(enemies[i]->getSprite().getPosition().x + 5,
+                                enemies[i]->getSprite().getPosition().y - 60);
+                            lastSee[i] = enemies[i]->getSee();
+                            break;
+                        }
                     }
                 }
             }
@@ -477,21 +480,21 @@ public:
                         fire = false;
                     }
                 }
-
+                
                 for (int i = 0; i < countEnemies; i++)
                 {
-                    if (enemies[i]->getSprite().getGlobalBounds().intersects(bulletSprite.getGlobalBounds()))
-                    {
-                        health = enemies[i]->getHealth();
-                        health -= 1;
-                        enemies[i]->setHealth(health);
-                        if (enemies[i]->getHealth() == 0)
+                        if (enemies[i]->getSprite().getGlobalBounds().intersects(bulletSprite.getGlobalBounds()))
                         {
-                            deathSound.play();
-                            enemies[i]->getSprite().setPosition(-100, -100);
+                            health = enemies[i]->getHealth();
+                            health -= 1;
+                            enemies[i]->setHealth(health);
+                            if (enemies[i]->getHealth() == 0)
+                            {
+                                deathSound.play();
+                                enemies[i]->getSprite().setPosition(-100, -100);
+                            }
+                            fire = false;
                         }
-                        fire = false;
-                    }
                 }
 
                 switch (bulletDirection)
