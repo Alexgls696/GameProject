@@ -157,6 +157,11 @@ public:
                 scoreText.setString(to_string(score));
                 loose = true;
                 gameMode = false;
+                sound.looseSound.play();
+                sound.cowboySound.stop();
+                sound.pacManSound.stop();
+                sound.invSound.stop();
+                secondsPlus--;
             }
             if (seconds > 0)
             {
@@ -233,6 +238,10 @@ public:
         {
             win = true;
             gameMode=false;
+            sound.cowboySound.stop();
+            sound.pacManSound.stop();
+            sound.invSound.stop();
+            sound.winSound.play();
             cout << "Game win!" << endl;
         }
     }

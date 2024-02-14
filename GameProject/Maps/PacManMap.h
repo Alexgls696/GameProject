@@ -24,8 +24,8 @@ public:
             obstacles[i]->getSprite().setRotation(rotationAngle[rand() % 2]);
         }
 
-        int Ax = getBoundsPosition()[0].x + 20;
-        int Ay = getBoundsPosition()[0].y + 20;
+        int Ax = getBoundsPosition()[0].x + 50;
+        int Ay = getBoundsPosition()[0].y + 50;
         int Bx = rect.getPosition().x + rect.getSize().x - 200;
         int By = rect.getPosition().y + rect.getSize().y - 200;
 

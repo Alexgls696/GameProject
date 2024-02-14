@@ -322,9 +322,9 @@ public:
             {
                 if(enemies[i]->getSprite().getPosition().x!=-100)
                 {
-                    if (EnemyFrame[i] > 4 && EnemyFrame[i] < 5 && !fireEnemy[i])
+                    if (EnemyFrame[i] > 4 && EnemyFrame[i] < 5)
                     {
-                        shootSound.play();
+                        if(!fireEnemy[i]) shootSound.play();
                         fireEnemy[i] = true;
                         switch (enemies[i]->getSee())
                         {
