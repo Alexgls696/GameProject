@@ -229,7 +229,8 @@ public:
             }
             switch (player->getHealth())
             {
-            case 2:  healthSprite.setTextureRect(IntRect(43, 0, 40, 8)); break;
+            case 3: healthSprite.setTextureRect(IntRect(0, 0, 40, 8)); break;
+            case 2: healthSprite.setTextureRect(IntRect(43, 0, 40, 8)); break;
             case 1: healthSprite.setTextureRect(IntRect(87, 0, 40, 8)); break;
             case 0: healthSprite.setTextureRect(IntRect(131, 0, 40, 8)); break;
             }

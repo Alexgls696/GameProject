@@ -154,7 +154,7 @@ public:
             direction = DOWN;
         }
         
-        if (Keyboard::isKeyPressed(Keyboard::Space))
+        if (Keyboard::isKeyPressed(Keyboard::Space) || Mouse::isButtonPressed(Mouse::Left))
         {
             if(std::clock()-fireTimer>500)
             {

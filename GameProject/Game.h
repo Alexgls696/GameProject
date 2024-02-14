@@ -440,7 +440,7 @@ public:
     }
     void go()
     {
-        RenderWindow window(VideoMode(WIDTH, HEIGHT), "Game");
+        RenderWindow window(VideoMode(WIDTH, HEIGHT), "Game", Style::Fullscreen);
         window.setFramerateLimit(60);
         link:
         start();
