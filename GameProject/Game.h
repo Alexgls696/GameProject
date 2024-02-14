@@ -82,6 +82,7 @@ private:
     bool flagCowboyMusic;
     string currentMapName;
     Menu menu;
+    int health;
     GameSound sound; //Класс в каталоге Sound. Поставьте нужную вам музыку. Если нужно вызвать звук здесь,
     //то добавляем в класс звук и тут воспроизводим.
     //Если нужно на вашей карте или при какои то действии вашего персонажа, то добавляем в свой класс звуки отдельно.
@@ -224,6 +225,12 @@ public:
                                             .intersects(player->getSprite().getGlobalBounds()))
                 {
                     score += 100;
+                    if (maps[i]->get_name()._Equal("RedDeadMap") && player->getHealth()<3) 
+                    {
+                        health = player->getHealth();
+                        health += 1;
+                        player->setHealth(health);
+                    }
                     maps[i]->intersectBonuses(j);
                     maps[i]->getBonusSoundPlay();
                     totalCountBonuses++;
